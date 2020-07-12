@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorCCCCCC">
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/digit_area"
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+        <TextView
+            android:id="@+id/tvCyfra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif"
+            android:textSize="@dimen/cyfra_size"
+            android:textStyle="bold"
+            android:textColor="#000">
+        </TextView>
+
+        <Button
+            android:id="@+id/bPrzelacz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="bPrzelaczKlik"
+            android:text="przelacz" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/buttons_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/brzeg_margin">
+
+<!--  tutaj zostanie programowa wygenerowane do 6-ciu buttonow MojButtom
+        <Button
+            android:id="@+id/b1"
+            android:tag="b1"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="*"
+            android:background="@color/colorAAAAAA">
+        </Button>
+&lt;!&ndash;        android:layout_weight="1"&ndash;&gt;
+
+
+-->
+
+    </LinearLayout>
+
+
+</LinearLayout>
