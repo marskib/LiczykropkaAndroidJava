@@ -1,6 +1,7 @@
 package autyzmsoft.pl.liczykropka;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.util.TypedValue;
@@ -27,6 +28,7 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
         this.czyJakLiczba = czyJakLiczba;
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, textRozmiar);
         this.setHeight(btnWys);
+        this.setBackgroundColor(Color.GRAY);
         this.setTypeface(null, Typeface.BOLD);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

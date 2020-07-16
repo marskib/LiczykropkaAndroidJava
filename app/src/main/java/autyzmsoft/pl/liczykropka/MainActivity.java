@@ -12,14 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     public final static int MAX_BTS = 6;
-    int  lBts = 6;                             //liczba buttonow (z Ustawien)
     MojButton[] tButtons = new MojButton[MAX_BTS];   //tablica buttonów z wyrazami
     LinearLayout buttons_area;
-
     private float txSize = 0.0f;
+
     private int height   = 0;
     private int btH      = 0;
     private int width    = 0;
+
+    int  lBts = 4;                             //liczba buttonow (z Ustawien)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,13 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
             txSize = (float) (btH / 3.5);
 
-            //podrasowanie na Kotlin - 2020.07.03:
-//            btH = when (lBts) {
-//                6 -> (btH / 1.30).toInt()
-//                5 -> (btH / 1.25).toInt()
-//            else -> (btH / 1.20).toInt()
-//            }
-
+            //podrasowanie  - 2020.07.16:
             switch(lBts) {
                 case 6: btH = (int) (btH / 1.30); break;
                 case 5: btH = (int) (btH / 1.25); break;
@@ -114,12 +109,9 @@ public class MainActivity extends AppCompatActivity {
         //1.Remove title bar:
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //2.Remove notification bar:
-        getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //3. Usuwa godzine, date i inne pierdoly:
-        //supportActionBar.hide();
+        getSupportActionBar().hide();
     }
 
 
