@@ -21,7 +21,7 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
     private Character kolko = 9679;
     private String circles  = "";      //do zobrazowania wartosc'i w postaci kolek
 
-    public MojButton(Context context,  int wartosc, boolean czyJakLiczba, int btnWys, float textRozmiar) {
+    public MojButton(Context context,  int wartosc, boolean czyJakLiczba, float textRozmiar, int btnWys) {
         super(context);
         this.wartosc = wartosc;
         this.czyJakLiczba = czyJakLiczba;
