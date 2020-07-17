@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         //
 
         MojGenerator mGen = null;
-        mGen = new MojGenerator(0, 6);
+        mGen = new MojGenerator(3, 5);
 
         for (int i=0; i<lBts; i++) {
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButtons[i].getLayoutParams();// as LinearLayout.LayoutParams;
-                dx = 10;
+                dx = 20;
                 if (lBts < 4) dx = 20;
                 params.setMargins(0, dx, 0, 0);
                 tButtons[i].setLayoutParams(params);
