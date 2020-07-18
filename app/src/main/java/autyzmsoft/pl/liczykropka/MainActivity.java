@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
+
     public final static int MAX_BTS = 6;
     MojButton[] tButtons = new MojButton[MAX_BTS];   //tablica buttonów z wyrazami
     LinearLayout buttons_area;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private int btH      = 0;
     private int width    = 0;
 
-    int  lBts = 4;                             //liczba buttonow (z Ustawien)
+    int  lBts = 6;   //liczba buttonow (z Ustawien)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +31,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         buttons_area = findViewById(R.id.buttons_area);
         wygenerujButtony();
-
     }
 
     private void wygenerujButtony() {
         /* Generujemy lBts buttonow; zapamietujemy w tablicy tButtons[]; pokazujemy na ekranie */
         MojButton mb = null; //robocza, dla wiekszej czytelnosci
-
-        int dx = 0; //margin w pionie pomiedzy klawiszami
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-
-        MojGenerator mGen = null;
-        mGen = new MojGenerator(3, 5);
+        MojGenerator mGen = new MojGenerator(0, 6);
 
         for (int i=0; i<lBts; i++) {
 
@@ -52,20 +48,22 @@ public class MainActivity extends AppCompatActivity {
 //                mb.setOnClickListener(coNaKlikNaBtn)
                 tButtons[i] = mb;
                 buttons_area.addView(tButtons[i]);
-
-                //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButtons[i].getLayoutParams();// as LinearLayout.LayoutParams;
-                dx = 20;
-                if (lBts < 4) dx = 20;
-                params.setMargins(0, dx, 0, 0);
-                tButtons[i].setLayoutParams(params);
+                ustawMarginesy(tButtons[i]);
                 tButtons[i].setVisibility(View.VISIBLE); //za chwile pokaze z opoznieniem - efekciarstwo ;)
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     } //koniec Funkcji
+
+    private void ustawMarginesy(final MojButton tButton) {
+        //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
+        int dx = 10; //margin w pionie pomiedzy klawiszami (defaultowo)
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButton.getLayoutParams();// as LinearLayout.LayoutParams;
+        if (lBts < 4) dx = 20;
+        params.setMargins(0, dx, 0, 0);
+        tButton.setLayoutParams(params);
+    }
 
     private void oszacujWysokoscButtonow_i_Tekstu() {
             /* ******************************************************************************************************************************** */

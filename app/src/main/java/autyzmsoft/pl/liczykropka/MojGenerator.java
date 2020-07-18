@@ -34,7 +34,7 @@ public class MojGenerator {
 
         this.zbLiczb = new HashSet<Integer>();
 
-//        if (min >= max) {
+//        if (min > max) {
 //            throw new CustomExceptionSkib("komunikat ode mnie");
 //        }
 
