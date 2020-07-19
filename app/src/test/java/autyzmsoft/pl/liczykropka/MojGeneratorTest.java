@@ -18,8 +18,8 @@ public class MojGeneratorTest {
 
     @Test
     public void dajWartDowolna_ShoulBeInMinMax() throws Exception {
-        min=-1;
-        max=-1;
+        min=-2;
+        max=-2;
         setUp();
         int gen = SUT.dajWartDowolna();
         boolean wPrzedziale = (gen>=min&&gen<=max);
@@ -28,17 +28,16 @@ public class MojGeneratorTest {
 
 
     @Test(expected=IllegalArgumentException.class)
-    public  void dajWartDowolna_ShouldThrowException() throws Exception {
-        min=5;
+    public  void Constructor_ShouldThrowException() throws Exception {
+        min=2;
         max=0;
         setUp();
-        int gen = SUT.dajWartDowolna();
     }
 
     @Test
     public void dajWartUnikalna_zwraca_Tablice_Unikalnych() throws Exception {
-        min= -10;
-        max=100;
+        min= -1000;
+        max=  1000;
         setUp();
         int[] tab = new int[max-min+1];
         for (int i=0; i<tab.length; i++) {

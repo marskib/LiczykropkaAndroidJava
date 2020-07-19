@@ -15,12 +15,14 @@ import android.util.TypedValue;
 public class MojButton extends androidx.appcompat.widget.AppCompatButton {
 
     private int     wartosc;       //liczba 0..6 przypisane do klawisza
+
     private boolean czyJakLiczba;  //jak ma byc obrazowana 'wartosc' - jak liczbe, czy kolka
     private float textRozmiar;
     private int btnWys = 20;
 
     private Character kolko = 9679;
     private String circles  = "";      //do zobrazowania wartosc'i w postaci kolek
+
 
     public MojButton(Context context,  int wartosc, boolean czyJakLiczba, float textRozmiar, int btnWys) {
         super(context);
@@ -60,6 +62,14 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
         else {
             return dajWartoscJakoKolka();
         }
+    }
+
+    public int getValue() {
+        return wartosc;
+    }
+
+    public boolean isCzyJakLiczba() {
+        return czyJakLiczba;
     }
 
 }

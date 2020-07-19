@@ -34,8 +34,12 @@ public class MojGenerator {
 
         this.zbLiczb = new HashSet<Integer>();
 
+        if (min > max) {
+            throw new IllegalArgumentException("max musi być większe niż min");
+        }
+
 //        if (min > max) {
-//            throw new CustomExceptionSkib("komunikat ode mnie");
+//            throw new CustomExceptionSkib("max musi być większe niż min");
 //        }
 
         this.min = min;
@@ -49,6 +53,7 @@ public class MojGenerator {
         for (int liczba=min; liczba<=max; liczba++) {
             if (!zbLiczb.contains(liczba)) {
                 jestCosWolnego = true;
+                break;
             }
         }
         if (!jestCosWolnego) {
@@ -70,9 +75,9 @@ public class MojGenerator {
     }
 
     private static int getRandomNumberInRange(int min, int max) {
-        if (min > max) {
-            throw new IllegalArgumentException("max must be greater than min");
-        }
+//        if (min > max) {
+//            throw new IllegalArgumentException("max must be greater than min");
+//        }
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }

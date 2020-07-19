@@ -3,20 +3,24 @@ package autyzmsoft.pl.liczykropka;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-
 
 
 public class MainActivity extends AppCompatActivity {
 
     public final static int MAX_BTS = 6;
     MojButton[] tButtons = new MojButton[MAX_BTS];   //tablica buttonów z wyrazami
-    LinearLayout buttons_area;
-    private float txSize = 0.0f;
 
+    LinearLayout buttons_area;
+    TextView tvCyfra;
+
+    private float txSize = 0.0f;
     private int height   = 0;
     private int btH      = 0;
     private int width    = 0;
@@ -30,22 +34,37 @@ public class MainActivity extends AppCompatActivity {
         //Set content view AFTER ABOVE sequence (calyEkran()) to avoid crash:
         setContentView(R.layout.activity_main);
         buttons_area = findViewById(R.id.buttons_area);
+        tvCyfra = findViewById(R.id.tvCyfra);
         wygenerujButtony();
     }
 
+    /***
+     * Zmina sposobu wyswietlania na buttonach
+     */
+    public void bPrzelaczKlik(View view) {
+        for (final MojButton mb : tButtons) {
+            mb.setCzyJakLiczba(!mb.isCzyJakLiczba());
+            mb.setText(mb.dajWartoscStringowo());
+        }
+        tvCyfra.setText("");
+    }
+
+    /**
+     * Generuje lBts buttonow; zapamietuje w tablicy tButtons[]; pokazuje na ekranie
+     */
     private void wygenerujButtony() {
-        /* Generujemy lBts buttonow; zapamietujemy w tablicy tButtons[]; pokazujemy na ekranie */
+
         MojButton mb = null; //robocza, dla wiekszej czytelnosci
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(0, 6);
+        MojGenerator mGen = new MojGenerator(1, 6);
 
         for (int i=0; i<lBts; i++) {
 
             try {
-                mb = new MojButton(this, mGen.dajWartUnikalna(), false, txSize, btH);
-//                mb.setOnClickListener(coNaKlikNaBtn)
+                mb = new MojButton(this, mGen.dajWartUnikalna(), true, txSize, btH);
+                mb.setOnClickListener(coNaKlikNaBtn);
                 tButtons[i] = mb;
                 buttons_area.addView(tButtons[i]);
                 ustawMarginesy(tButtons[i]);
@@ -55,6 +74,40 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     } //koniec Funkcji
+
+
+    /**
+     * Wypisanie liczby bądź kolek w polu tv_liczba i odpowiedniego stowarzyszonego stringa w tvCyfra
+     * Unieczynnienie innych klawiszy na chwile - dydaktyka.
+     */
+    private OnClickListener coNaKlikNaBtn = new OnClickListener() {
+        @Override
+        public void onClick(final View view) {
+            //jak na klawiszu jest cyfra, to wyswietlamy kolka:
+            if (((MojButton) view).isCzyJakLiczba()) {
+                ustawTextSize((Button) view);
+                ustawLetterSpacing((MojButton) view);
+                tvCyfra.setText(((MojButton) view).dajWartoscJakoKolka());
+            } else { //jak sa kolka, to wyswietlamy cyfre
+                tvCyfra.setText(((MojButton) view).dajWartoscJakoCyfre());
+            }
+        }
+
+        private void ustawLetterSpacing(final Button view) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                float ls = view.getLetterSpacing();
+                ls = (float) (0.8*ls);
+                if (((MojButton)view).getValue()==6) ls=(float) (0.7*ls); //bo troche za szeroko...
+                tvCyfra.setLetterSpacing(ls);
+            }
+        }
+
+        private void ustawTextSize(final Button view) {
+            float ts = view.getTextSize();
+            ts = (float) (0.7*ts);
+            tvCyfra.setTextSize(ts);
+        }
+    };
 
     private void ustawMarginesy(final MojButton tButton) {
         //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
