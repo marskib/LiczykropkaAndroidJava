@@ -1,6 +1,7 @@
 package autyzmsoft.pl.liczykropka;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout buttons_area;
     TextView tvCyfra;
+    float  tsCyfra; //rozmiar tvCyfra z design-time
 
     private float txSize = 0.0f;
     private int height   = 0;
@@ -35,11 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         buttons_area = findViewById(R.id.buttons_area);
         tvCyfra = findViewById(R.id.tvCyfra);
+        tsCyfra = tvCyfra.getTextSize();
         wygenerujButtony();
     }
 
     /***
-     * Zmina sposobu wyswietlania na buttonach
+     * Zmina sposobu wyswietlania na buttonach; czyszczenie obszaru z cyfrą
      */
     public void bPrzelaczKlik(View view) {
         for (final MojButton mb : tButtons) {
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void wygenerujButtony() {
 
-        MojButton mb = null; //robocza, dla wiekszej czytelnosci
+        MojButton mb; //robocza, dla wiekszej czytelnosci
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
@@ -85,27 +88,57 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(final View view) {
             //jak na klawiszu jest cyfra, to wyswietlamy kolka:
             if (((MojButton) view).isCzyJakLiczba()) {
-                ustawTextSize((Button) view);
-                ustawLetterSpacing((MojButton) view);
+                ustawTextSize((Button) view, tvCyfra);
+                ustawLetterSpacing((MojButton) view, tvCyfra);
                 tvCyfra.setText(((MojButton) view).dajWartoscJakoKolka());
             } else { //jak sa kolka, to wyswietlamy cyfre
+                tvCyfra.setTextSize(tsCyfra);
                 tvCyfra.setText(((MojButton) view).dajWartoscJakoCyfre());
             }
+            UnieczynnijNaChwile(2000,tButtons,(Button)view);
         }
 
-        private void ustawLetterSpacing(final Button view) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                float ls = view.getLetterSpacing();
-                ls = (float) (0.8*ls);
-                if (((MojButton)view).getValue()==6) ls=(float) (0.7*ls); //bo troche za szeroko...
-                tvCyfra.setLetterSpacing(ls);
+        /***
+         * Na 'chwile' unieczynnia wszystke klawisze oprocz kliknietego (except)
+         * Po 'chwili' czysci
+         * @param chwila   - miliseconds
+         * @param tButtons - tablica z buttonami
+         * @param except   - klikniety klawisz
+         */
+        private void UnieczynnijNaChwile(final int chwila, final MojButton[] tButtons, final Button except) {
+            Handler mHandler = new Handler();
+            for (final MojButton bt : tButtons) {
+                if (bt==except) continue;
+                bt.setEnabled(false);
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        bt.setEnabled(true);
+                        tvCyfra.setText("");
+                    }
+                },chwila);
             }
         }
 
-        private void ustawTextSize(final Button view) {
-            float ts = view.getTextSize();
+        /***
+         * Na tvCyfra ustawia takie letter spacing jak na buttonach (gdy rysujemy kolka)
+         */
+        private void ustawLetterSpacing(final Button source, TextView dest) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                float ls = source.getLetterSpacing();
+                ls = (float) (0.8*ls);
+                if (((MojButton)source).getValue()==6) ls=(float) (0.7*ls); //bo troche za szeroko...
+                dest.setLetterSpacing(ls);
+            }
+        }
+
+        /***
+         * Na tvCyfra ustawia taki text size jak na buttonach (gdy rysujemy kolka)
+         */
+        private void ustawTextSize(final Button source, TextView dest) {
+            float ts = source.getTextSize();
             ts = (float) (0.7*ts);
-            tvCyfra.setTextSize(ts);
+            dest.setTextSize(ts);
         }
     };
 

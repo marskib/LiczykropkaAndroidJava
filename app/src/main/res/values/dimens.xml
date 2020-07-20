@@ -2,5 +2,5 @@
 
 <resources>
     <dimen name="brzeg_margin">30dp</dimen>
-    <dimen name="cyfra_size">90sp</dimen>
+    <dimen name="cyfra_size">40sp</dimen>
 </resources>
