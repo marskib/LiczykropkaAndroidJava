@@ -1,13 +1,10 @@
 package autyzmsoft.pl.liczykropka;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     int  lBts = 6;   //liczba buttonow (z Ustawien)
 
+    MojBtnListener coNaKlikNaBtn; //listener do podpiecia na klawisze
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         buttons_area = findViewById(R.id.buttons_area);
         tvCyfra = findViewById(R.id.tvCyfra);
         tsCyfra = tvCyfra.getTextSize();
+        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tsCyfra,tButtons); //listener do podpiecia na klawisze
         wygenerujButtony();
     }
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(1, 6);
+        MojGenerator mGen = new MojGenerator(0, 6);
 
         for (int i=0; i<lBts; i++) {
 
@@ -78,69 +78,6 @@ public class MainActivity extends AppCompatActivity {
         }
     } //koniec Funkcji
 
-
-    /**
-     * Wypisanie liczby bądź kolek w polu tv_liczba i odpowiedniego stowarzyszonego stringa w tvCyfra
-     * Unieczynnienie innych klawiszy na chwile - dydaktyka.
-     */
-    private OnClickListener coNaKlikNaBtn = new OnClickListener() {
-        @Override
-        public void onClick(final View view) {
-            //jak na klawiszu jest cyfra, to wyswietlamy kolka:
-            if (((MojButton) view).isCzyJakLiczba()) {
-                ustawTextSize((Button) view, tvCyfra);
-                ustawLetterSpacing((MojButton) view, tvCyfra);
-                tvCyfra.setText(((MojButton) view).dajWartoscJakoKolka());
-            } else { //jak sa kolka, to wyswietlamy cyfre
-                tvCyfra.setTextSize(tsCyfra);
-                tvCyfra.setText(((MojButton) view).dajWartoscJakoCyfre());
-            }
-            UnieczynnijNaChwile(2000,tButtons,(Button)view);
-        }
-
-        /***
-         * Na 'chwile' unieczynnia wszystke klawisze oprocz kliknietego (except)
-         * Po 'chwili' czysci
-         * @param chwila   - miliseconds
-         * @param tButtons - tablica z buttonami
-         * @param except   - klikniety klawisz
-         */
-        private void UnieczynnijNaChwile(final int chwila, final MojButton[] tButtons, final Button except) {
-            Handler mHandler = new Handler();
-            for (final MojButton bt : tButtons) {
-                if (bt==except) continue;
-                bt.setEnabled(false);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        bt.setEnabled(true);
-                        tvCyfra.setText("");
-                    }
-                },chwila);
-            }
-        }
-
-        /***
-         * Na tvCyfra ustawia takie letter spacing jak na buttonach (gdy rysujemy kolka)
-         */
-        private void ustawLetterSpacing(final Button source, TextView dest) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                float ls = source.getLetterSpacing();
-                ls = (float) (0.8*ls);
-                if (((MojButton)source).getValue()==6) ls=(float) (0.7*ls); //bo troche za szeroko...
-                dest.setLetterSpacing(ls);
-            }
-        }
-
-        /***
-         * Na tvCyfra ustawia taki text size jak na buttonach (gdy rysujemy kolka)
-         */
-        private void ustawTextSize(final Button source, TextView dest) {
-            float ts = source.getTextSize();
-            ts = (float) (0.7*ts);
-            dest.setTextSize(ts);
-        }
-    };
 
     private void ustawMarginesy(final MojButton tButton) {
         //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
