@@ -1,10 +1,13 @@
 package autyzmsoft.pl.liczykropka;
 
 import android.os.Handler;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.sql.Array;
 
 /***
  * Klasa do zbudowania listenera podpinanego na klawisze z tButtons
@@ -12,9 +15,11 @@ import android.widget.TextView;
  */
 public class MojBtnListener implements OnClickListener {
 
-    TextView tvCyfra;
-    float tsCyfra;
-    MojButton[] tButtons;
+    private TextView tvCyfra;
+    private float tsCyfra;
+    private MojButton[] tButtons;
+
+    MojGenerator[] mg;
 
     /***
      * Konstruktor.
@@ -52,14 +57,21 @@ public class MojBtnListener implements OnClickListener {
      * Na 'chwile' unieczynnia wszystke klawisze oprocz kliknietego (except)
      * Po 'chwili' czysci
      * @param chwila   - miliseconds
-     * @param except   - klikniety klawisz
+     * @param btExcept   - klikniety klawisz
      */
-    private void UnieczynnijNaChwile(int chwila, Button except) {
-        Handler mHandler = new Handler();
+    private void UnieczynnijNaChwile(int chwila, final Button btExcept) {
+        final float ts = btExcept.getTextSize();
+        Handler h1 = new Handler();
         for (final MojButton bt : tButtons) {
-            if (bt==except) continue;
+            if (bt==btExcept) {
+                bt.setTextSize(TypedValue.COMPLEX_UNIT_PX, (float) (ts*1.6));
+                bt.setClickable(false);
+                continue;
+            }
+
             bt.setEnabled(false);
-            mHandler.postDelayed(new Runnable() {
+
+            h1.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     bt.setEnabled(true);
@@ -67,6 +79,16 @@ public class MojBtnListener implements OnClickListener {
                 }
             },chwila);
         }
+        Handler h2 = new Handler();
+        h2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (Button bt : tButtons) {
+                    bt.setTextSize(TypedValue.COMPLEX_UNIT_PX, ts);
+                    bt.setClickable(true);
+                }
+            }
+        },chwila);
     }
 
     /***
@@ -86,8 +108,7 @@ public class MojBtnListener implements OnClickListener {
      */
     private void ustawTextSize(final Button source, TextView dest) {
         float ts = source.getTextSize();
-        ts = (float) (0.7*ts);
-        dest.setTextSize(ts);
+        dest.setTextSize(TypedValue.COMPLEX_UNIT_SP,ts);
     }
 };
 
