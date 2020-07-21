@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(0, 6);
+        MojGenerator mGen = new MojGenerator(1, 6);
 
         for (int i=0; i<lBts; i++) {
 

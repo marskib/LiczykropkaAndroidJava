@@ -14,19 +14,21 @@ import android.util.TypedValue;
 
 public class MojButton extends androidx.appcompat.widget.AppCompatButton {
 
-    private int     wartosc;       //liczba 0..6 przypisane do klawisza
+    private int wartosc;           //liczba 0..6 przypisane do klawisza
 
     private boolean czyJakLiczba;  //jak ma byc obrazowana 'wartosc' - jak liczbe, czy kolka
-    private float textRozmiar;
+
+    private float textRozmiar;    //ns przechowywania inicjalnego rozmiaru tekstu
     private int btnWys = 20;
 
     private Character kolko = 9679;
-    private String circles  = "";      //do zobrazowania wartosc'i w postaci kolek
+    private String circles  = "";      //do zobrazowania wartosci w postaci kolek
 
 
     public MojButton(Context context,  int wartosc, boolean czyJakLiczba, float textRozmiar, int btnWys) {
         super(context);
         this.wartosc = wartosc;
+        this.textRozmiar = textRozmiar;
         this.czyJakLiczba = czyJakLiczba;
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, textRozmiar);
         this.setHeight(btnWys);
@@ -64,8 +66,19 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
         }
     }
 
+    public void powiekszTekst(int unit, float newSize) {
+        this.setTextSize(unit,newSize);
+    }
+
+
     public int getValue() {
         return wartosc;
+    }
+
+    public float getInitialTextSize() {return this.textRozmiar;}
+
+    public void restoreInitialTextSize() {
+        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, textRozmiar);
     }
 
     public boolean isCzyJakLiczba() {
