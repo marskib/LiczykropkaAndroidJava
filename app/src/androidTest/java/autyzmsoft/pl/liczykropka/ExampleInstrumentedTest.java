@@ -18,11 +18,17 @@ public class ExampleInstrumentedTest {
 
     MojButton SUT;
 
+
+    Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+
     @Before
     public void mojTest(){
-        //Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        //Context appContext = mock(Context.class);
-        //SUT = new MojButton(appContext, 4,true,40,20);
+
+
+
+//        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+//        Context appContext = mock(Context.class);
+        SUT = new MojButton(appContext, 4,true,40,20);
     }
 
     //Ponizej 'fabryczna' metoda - stad bralem wzor - nie wyrzucac:

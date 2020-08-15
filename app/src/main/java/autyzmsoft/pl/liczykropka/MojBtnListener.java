@@ -41,15 +41,14 @@ public class MojBtnListener implements OnClickListener {
     @Override
     public void onClick(View view) {
         float ts = ((Button)view).getTextSize();
+        //Na buttonie:
         ((MojButton)view).powiekszTekst(COMPLEX_UNIT_PX,ts*1.6F);
+        //Na gorze ekranu:
         //jak na buttonie jest cyfra, to wyswietlamy kolka na gorze ekranu:
         if (((MojButton) view).isCzyJakLiczba()) {
-//            ustawTextSize((Button) view, tvCyfra);
-//            ustawLetterSpacing((MojButton) view, tvCyfra);
             tvCyfra.setText(((MojButton) view).dajWartoscJakoKolka());
         //jak ba buttonie sa kolka, to wyswietlamy cyfre na gorze ekranu:
         } else {
-//            tvCyfra.setTextSize(tsCyfra);
             tvCyfra.setText(((MojButton) view).dajWartoscJakoCyfre());
         }
         UnieczynnijPotemPrzywroc(CHWILA, (Button)view);

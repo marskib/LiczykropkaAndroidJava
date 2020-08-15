@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorCCCCCC">
+    android:background="@color/colorCCCCCC"
+    tools:ignore="MissingDefaultResource">
 
 
 
@@ -14,16 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="180dp">
 
-        <TextView
+
+        <autyzmsoft.pl.liczykropka.MojTextView
             android:id="@+id/tvCyfra"
+            android:text="ala ma kota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="sans-serif"
             android:textSize="@dimen/cyfra_size"
             android:textStyle="bold"
-            android:textColor="#000">
-        </TextView>
+            android:textColor="#000"/>
+        />
 
         <Button
             android:id="@+id/bPrzelacz"
@@ -31,6 +34,13 @@
             android:layout_height="wrap_content"
             android:onClick="bPrzelaczKlik"
             android:text="przelacz" />
+
+
+        <TextView
+            android:id="@+id/tvProbny"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ala ma kota"/>
 
     </RelativeLayout>
 

@@ -18,7 +18,7 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
 
     private boolean czyJakLiczba;  //jak ma byc obrazowana 'wartosc' - jak liczbe, czy kolka
 
-    private float textRozmiar;    //ns przechowywania inicjalnego rozmiaru tekstu
+    private float initTextRozmiar;    //na przechowywania inicjalnego rozmiaru tekstu
     private int btnWys = 20;
 
     private Character kolko = 9679;
@@ -28,7 +28,7 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
     public MojButton(Context context,  int wartosc, boolean czyJakLiczba, float textRozmiar, int btnWys) {
         super(context);
         this.wartosc = wartosc;
-        this.textRozmiar = textRozmiar;
+        this.initTextRozmiar = textRozmiar;
         this.czyJakLiczba = czyJakLiczba;
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, textRozmiar);
         this.setHeight(btnWys);
@@ -66,7 +66,25 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
         }
     }
 
+    /***
+     * Uzywana przy drukowaniu kolek na klawiszu.
+     * Troche zmniejsza, jesli jest ich duzo...
+     */
+    private float modyfSize(float size) {
+
+//        if (wartosc==6)
+//            return 5*(size/wartosc);
+//        else
+//            return size;
+
+        return 5*(size/6);
+
+    }
+
     public void powiekszTekst(int unit, float newSize) {
+        if (!czyJakLiczba) { //jesli maja byc kolka, to trzeba troche zmniejszyc przy 6-ciu, bo wychodzą...
+            newSize = modyfSize(newSize);
+        }
         this.setTextSize(unit,newSize);
     }
 
@@ -75,10 +93,10 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
         return wartosc;
     }
 
-    public float getInitialTextSize() {return this.textRozmiar;}
+    public float getInitialTextSize() {return this.initTextRozmiar;}
 
     public void restoreInitialTextSize() {
-        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, textRozmiar);
+        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, initTextRozmiar);
     }
 
     public boolean isCzyJakLiczba() {

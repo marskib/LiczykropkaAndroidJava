@@ -6,17 +6,16 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static int MAX_BTS = 6;
-    MojButton[] tButtons = new MojButton[MAX_BTS];   //tablica buttonów z wyrazami
+    public final static int MAX_BTNS = 6;
+    public static MojButton[] tButtons = new MojButton[MAX_BTNS];   //tablica buttonów z wyrazami
 
     LinearLayout buttons_area;
-    TextView tvCyfra;
+    MojTextView tvCyfra;
     float  tsCyfra; //rozmiar tvCyfra z design-time
 
     private float txSize = 0.0f;
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private int btH      = 0;
     private int width    = 0;
 
-    int  lBts = 6;   //liczba buttonow (z Ustawien)
+    int lBtns = 6;   //liczba buttonow (z Ustawien)
 
     MojBtnListener coNaKlikNaBtn; //listener do podpiecia na klawisze
 
@@ -35,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         //Set content view AFTER ABOVE sequence (calyEkran()) to avoid crash:
         setContentView(R.layout.activity_main);
         buttons_area = findViewById(R.id.buttons_area);
+
         tvCyfra = findViewById(R.id.tvCyfra);
+
         tsCyfra = tvCyfra.getTextSize();
         coNaKlikNaBtn = new MojBtnListener(tvCyfra,tsCyfra,tButtons); //listener do podpiecia na klawisze
         wygenerujButtony();
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //
         MojGenerator mGen = new MojGenerator(1, 6);
 
-        for (int i=0; i<lBts; i++) {
+        for (int i=0; i< lBtns; i++) {
 
             try {
                 mb = new MojButton(this, mGen.dajWartUnikalna(), true, txSize, btH);
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
         int dx = 10; //margin w pionie pomiedzy klawiszami (defaultowo)
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButton.getLayoutParams();// as LinearLayout.LayoutParams;
-        if (lBts < 4) dx = 20;
+        if (lBtns < 4) dx = 20;
         params.setMargins(0, dx, 0, 0);
         tButton.setLayoutParams(params);
     }
@@ -102,22 +103,22 @@ public class MainActivity extends AppCompatActivity {
             width = dm.widthPixels;
             height = dm.heightPixels;
 
-            if (lBts <= 4) {
+            if (lBtns <= 4) {
                 int lBtsRob = 2;
                 btH = height / (lBtsRob + 3); //bylo 2; button height; doswiadczalnie
                 btH = btH - 0;
             }
-            if (lBts == 5) {   // bo dobrze wyglada przy 5-ciu klawiszach:
+            if (lBtns == 5) {   // bo dobrze wyglada przy 5-ciu klawiszach:
                 int lBtsRob = 4;
                 btH = height / (lBtsRob + 2); //button height; doswiadczalnie
             }
-            if (lBts == 6) {
-                btH = height / (lBts + 1);  //button height; doswiadczalnie
+            if (lBtns == 6) {
+                btH = height / (lBtns + 1);  //button height; doswiadczalnie
             }
             txSize = (float) (btH / 3.5);
 
             //podrasowanie  - 2020.07.16:
-            switch(lBts) {
+            switch(lBtns) {
                 case 6: btH = (int) (btH / 1.30); break;
                 case 5: btH = (int) (btH / 1.25); break;
                 default: btH = (int) (btH / 1.20); break;
