@@ -13,6 +13,8 @@ import androidx.test.rule.ActivityTestRule;
 import org.junit.*;
 import org.junit.runner.*;
 
+;
+
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -23,6 +25,9 @@ public class MojInstrumentedTest {
 
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule(MainActivity.class);
+
+
+    MainActivity SUT;
 
 
     @Test
@@ -65,12 +70,39 @@ public class MojInstrumentedTest {
         onView(withId(R.id.tvProbny)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void moje_buttony_sie_pojawiaja() throws Exception {
-        for (final MojButton tButton : MainActivity.tButtons) {
-            onView(withId(R.id.tButton)).check(matches(isDisplayed()));
+//    @Test
+//    public void moje_buttony_sie_pojawiaja() throws Exception {
+//        for (final MojButton tButton : MainActivity.tButtons) {
+//            onView(withId(R.id.tButton)).check(matches(isDisplayed()));
+//
+//        }
+//    }
 
+ /*   @Test
+    public void proba() {
+//SUT = new MainActivity(); - nie trzyma na sleep().....
+        SUT = rule.getActivity();
+        for (final MojButton tButton : SUT.tButtons) {
+            onView(SUT.buttons_area.findViewsWithText("1")).check(matches(isDisplayed()));
         }
     }
+*/
+
+    @Test
+    public void czy_istnieja_mbuttony() {
+        SUT = rule.getActivity();
+        for (final MojButton mb : SUT.tButtons) {
+            assertTrue(
+                    (mb.getText().equals("0")) ||
+                            (mb.getText().equals("1")) ||
+                            (mb.getText().equals("2")) ||
+                            (mb.getText().equals("3")) ||
+                            (mb.getText().equals("4")) ||
+                            (mb.getText().equals("5")) ||
+                            (mb.getText().equals("6"))
+            );
+        }
+    }
+
 
 }

@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static int MAX_BTNS = 6;
-    public static MojButton[] tButtons = new MojButton[MAX_BTNS];   //tablica buttonów z wyrazami
+    int MAX_BTNS = 6;
+    public MojButton[] tButtons = new MojButton[MAX_BTNS];   //tablica buttonów z wyrazami
 
-    LinearLayout buttons_area;
+    public LinearLayout buttons_area;
     MojTextView tvCyfra;
     float  tsCyfra; //rozmiar tvCyfra z design-time
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private int btH      = 0;
     private int width    = 0;
 
-    int lBtns = 6;   //liczba buttonow (z Ustawien)
+    int lBtns = 6;   //aktualna liczba buttonow (z Ustawien)
 
     MojBtnListener coNaKlikNaBtn; //listener do podpiecia na klawisze
 
@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Generuje lBts buttonow; zapamietuje w tablicy tButtons[]; pokazuje na ekranie
      */
-    private void wygenerujButtony() {
+    public void wygenerujButtony() {
 
         MojButton mb; //robocza, dla wiekszej czytelnosci
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(1, 6);
+        MojGenerator mGen = new MojGenerator(0, lBtns);
 
         for (int i=0; i< lBtns; i++) {
 
