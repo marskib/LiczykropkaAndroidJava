@@ -18,7 +18,7 @@
 
         <autyzmsoft.pl.liczykropka.MojTextView
             android:id="@+id/tvCyfra"
-            android:text="ala ma kota"
+            android:text=" "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

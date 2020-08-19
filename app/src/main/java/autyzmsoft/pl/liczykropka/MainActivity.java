@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     int MAX_BTNS = 6;
-    public MojButton[] tButtons = new MojButton[MAX_BTNS];   //tablica buttonów z wyrazami
+    MojButton[] tButtons = new MojButton[MAX_BTNS];   //tablica buttonów z wyrazami
 
-    public LinearLayout buttons_area;
+    LinearLayout buttons_area;
     MojTextView tvCyfra;
     float  tsCyfra; //rozmiar tvCyfra z design-time
 
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(0, lBtns);
+        MojGenerator mGen = new MojGenerator(1, lBtns);
 
         for (int i=0; i< lBtns; i++) {
 
