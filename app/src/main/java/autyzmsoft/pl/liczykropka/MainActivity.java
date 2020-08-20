@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout buttons_area;
     MojTextView tvCyfra;
-    float  tsCyfra; //rozmiar tvCyfra z design-time
 
     private float txSize = 0.0f;
     private int height   = 0;
@@ -37,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvCyfra = findViewById(R.id.tvCyfra);
 
-        tsCyfra = tvCyfra.getTextSize();
-        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tsCyfra,tButtons); //listener do podpiecia na klawisze
+        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons); //listener do podpiecia na klawisze
         wygenerujButtony();
     }
 
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(1, lBtns);
+        MojGenerator mGen = new MojGenerator(0, lBtns);
 
         for (int i=0; i< lBtns; i++) {
 

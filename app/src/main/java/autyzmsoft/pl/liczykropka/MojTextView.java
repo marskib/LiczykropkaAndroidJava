@@ -1,60 +1,62 @@
 package autyzmsoft.pl.liczykropka;
 
+import static android.util.TypedValue.COMPLEX_UNIT_PX;
+
 import android.content.Context;
+import android.os.Build;
+import android.os.Handler;
 import android.util.AttributeSet;
 
-public class MojTextView extends androidx.appcompat.widget.AppCompatTextView /*androidx.appcompat.widget.AppCompatTextView*/ {
-
-    private int wartosc;
-    private boolean czyJakLiczba;   //jak ma byc obrazowana 'wartosc' - jak liczbe, czy kolka
-    private float initTextRozmiar;  //na przechowywania inicjalnego rozmiaru tekstu
-    private Character kolko = 9679;
-    private String circles  = "";      //do zobrazowania wartosci w postaci kolek
-
-
-    public MojTextView(final Context context, final AttributeSet attrs) {
-      super(context, attrs);
-      ustawZmienne();
-    }
-
-    public void ustawZmienne() {
-    }
-
-
-
- /*
-    public MojTextView(final Context context, final AttributeSet attrs, final int wartosc, final boolean czyJakLiczba, final float initTextRozmiar, final Character kolko,
-            final String circles) {
-        super(context, attrs);
-        this.wartosc = wartosc;
-        this.czyJakLiczba = czyJakLiczba;
-        this.initTextRozmiar = initTextRozmiar;
-        this.kolko = kolko;
-        this.circles = circles;
-    }
-
-*/
-
-
-
-    /*
-    public MojTextView(final Context context, int wartosc, boolean czyJakLiczba, float textRozmiar) {
-        super(context);
-
-        this.wartosc = wartosc;
-        this.initTextRozmiar = textRozmiar;
-        this.czyJakLiczba = czyJakLiczba;
-        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, textRozmiar);
-        this.setBackgroundColor(Color.GRAY);
-        this.setTypeface(null, Typeface.BOLD);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.setLetterSpacing(0.4F);
-        }
-    }
+/***
+ * Klasa do opisania i wyswietlania cyfry tvCyfra wyswietlanej na gorze ekranu, po kliknieciu buttona.
+ * Autor - Skibinski, 2020.08.20
  */
 
+public class MojTextView extends androidx.appcompat.widget.AppCompatTextView  {
 
+    private float tsOrigin; //pierwotny (z xml) TextSize; bedzie potrzebny do zmiany rozmiaru miedzy cyfra/kółka
+
+    /**
+     * Taki konstruktor jest uzywany przez framework w czasie umieszcznia obiektu na layoucie -> attrs to to, co opisane w xml'u
+     * @param context
+     * @param attrs
+     */
+    public MojTextView(final Context context, final AttributeSet attrs) {
+      super(context, attrs);
+      tsOrigin = this.getTextSize();
+      //Jesli mialby pokazywac kolka, to niech bedzie nieco szerzej:
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+          this.setLetterSpacing(0.25F);
+      }
+    }
+
+    /***
+     * Pokazuje tvCyfra, znajdująca sie na gorze ekranu, w odpowiedni sposob.
+     * @param naPdst : na podstawie ktorego (=kliknietego) buttona ma pokazywac tvCyfrę
+     */
+    public void pokaz(final MojButton naPdst) {
+        if (naPdst.isCzyJakLiczba()) {
+            this.setText(naPdst.dajWartoscJakoKolka());
+            this.setTextSize(COMPLEX_UNIT_PX,tsOrigin);
+        } else {
+            this.setText(naPdst.dajWartoscJakoCyfre());
+            this.setTextSize(COMPLEX_UNIT_PX,2.8f*tsOrigin);
+        }
+    }
+
+    /***
+     * Po 'chwili' zawartosc tvCyfra znika.
+     * @param chwila
+     */
+    public void wymaz(final int chwila) {
+        final MojTextView rob = this;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               rob.setText(" "); //lepiej zostawic spacje niz pusty znak, bo appium/espresso nie zobaczy....
+            }
+        },chwila);
+    }
 
 
 }

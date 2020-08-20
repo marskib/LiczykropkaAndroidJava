@@ -71,12 +71,6 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
      * Troche zmniejsza, jesli jest ich duzo...
      */
     private float modyfSize(float size) {
-
-//        if (wartosc==6)
-//            return 5*(size/wartosc);
-//        else
-//            return size;
-
         return 5*(size/6);
 
     }
