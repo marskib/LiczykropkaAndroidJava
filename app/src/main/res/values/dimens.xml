@@ -4,4 +4,15 @@
     <dimen name="brzeg_margin">30dp</dimen>
     <dimen name="cyfra_size">40sp</dimen>
     <dimen name="tvInstrukcja_size">35sp</dimen>
+
+
+
+    <dimen name="maly_odstep">8dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="bOK_size">25sp</dimen>
+    <dimen name="nazwa_text_rozmiar_uwaga_na_huawei">18sp</dimen>
+
+    <dimen name="tvPoziom_size">28dp</dimen>
+
 </resources>

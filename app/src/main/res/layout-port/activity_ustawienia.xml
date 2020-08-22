@@ -1,29 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
-    android:fadeScrollbars="false"
     android:background="@color/colorAccent"
+    android:fadeScrollbars="false"
+    android:scrollbars="vertical"
     tools:ignore="MissingDefaultResource">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tytul_ustawienia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USTAWIENIA"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lkl_area"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_skib"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tytul_ustawienia">
 
         <TextView
-            android:id="@+id/tv_tytul"
+            android:id="@+id/tytul_lkl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textSize="@dimen/tvInstrukcja_size"
-            android:layout_marginBottom="0dp"
-            android:paddingBottom="0dp"
-            android:text="USTAWIENIA"/>
+            android:text="Liczba Klawiszy (1-6)"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/b_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tytul_lkl"
+            app:layout_constraintEnd_toStartOf="@id/tv_lkl"
+            android:onClick="bMinusKlik"/>
+
+        <TextView
+            android:id="@+id/tv_lkl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="5dp"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
 
-</LinearLayout>
+        <Button
+            android:id="@+id/b_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tytul_lkl"
+            app:layout_constraintStart_toEndOf="@id/tv_lkl"
+            android:onClick="bPlusKlik"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

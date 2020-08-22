@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         digit_area = findViewById(R.id.digit_area);
         digit_area.setOnLongClickListener(mojLongKlikListener());
 
-        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons); //listener do podpiecia na klawisze
+        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons); //listener do podpiecia na klawisze, potem "podwieszenie" pod kazdy klawisz
 
         wygenerujButtony();
     }
