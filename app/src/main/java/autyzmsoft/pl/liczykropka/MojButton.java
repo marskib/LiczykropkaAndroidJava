@@ -72,7 +72,6 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
      */
     private float modyfSize(float size) {
         return 5*(size/6);
-
     }
 
     public void powiekszTekst(int unit, float newSize) {
@@ -86,8 +85,6 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
     public int getValue() {
         return wartosc;
     }
-
-    public float getInitialTextSize() {return this.initTextRozmiar;}
 
     public void restoreInitialTextSize() {
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, initTextRozmiar);

@@ -26,7 +26,7 @@ public class MojTextView extends androidx.appcompat.widget.AppCompatTextView  {
       tsOrigin = this.getTextSize();
       //Jesli mialby pokazywac kolka, to niech bedzie nieco szerzej:
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-          this.setLetterSpacing(0.25F);
+          this.setLetterSpacing(0.20F);
       }
     }
 
@@ -49,11 +49,10 @@ public class MojTextView extends androidx.appcompat.widget.AppCompatTextView  {
      * @param chwila
      */
     public void wymaz(final int chwila) {
-        final MojTextView rob = this;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               rob.setText(" "); //lepiej zostawic spacje niz pusty znak, bo appium/espresso nie zobaczy....
+                MojTextView.this.setText(" ");  //lepiej zostawic spacje niz pusty znak, bo appium/espresso nie zobaczy....
             }
         },chwila);
     }

@@ -35,14 +35,15 @@ public class MojBtnListener implements OnClickListener {
      */
     @Override
     public void onClick(View view) {
-        float ts = ((Button)view).getTextSize();
-        //Na buttonie - tylko powiekszam zastany text/kolka:
+        float ts = ((MojButton) view).getTextSize();
+        //Na buttonie - powiekszam zastany text/kolka:
         ((MojButton)view).powiekszTekst(COMPLEX_UNIT_PX,ts*1.6F);
-        //Na gorze ekranu:
+        //Na gorze ekranu pokazuje cyfre/kolka:
         tvCyfra.pokaz((MojButton)view);
-        //
-        UnieczynnijPotemPrzywroc(CHWILA, (Button)view);
-        tvCyfra.wymaz(CHWILA);
+        //Ekspozycja buttona, potem powrot do 'normalnosci':
+        int n = ((MojButton) view).getValue(); //im większa cyfra, tym dłużej pokazuję - zeby dziecko zdążyło policzyć - dydaktyka
+        UnieczynnijPotemPrzywroc(CHWILA+n*800, (Button)view);
+        tvCyfra.wymaz(CHWILA+n*800);
     }
 
 

@@ -1,11 +1,15 @@
 package autyzmsoft.pl.liczykropka;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -14,7 +18,9 @@ public class MainActivity extends AppCompatActivity {
     int MAX_BTNS = 6;
     MojButton[] tButtons = new MojButton[MAX_BTNS];   //tablica buttonów z wyrazami
 
-    LinearLayout buttons_area;
+    LinearLayout   buttons_area;
+    RelativeLayout digit_area;
+
     MojTextView tvCyfra;
 
     private float txSize = 0.0f;
@@ -24,7 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     int lBtns = 6;   //aktualna liczba buttonow (z Ustawien)
 
-    MojBtnListener coNaKlikNaBtn; //listener do podpiecia na klawisze
+    MojBtnListener coNaKlikNaBtn;                  //listener do podpiecia na klawisze
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +45,31 @@ public class MainActivity extends AppCompatActivity {
 
         tvCyfra = findViewById(R.id.tvCyfra);
 
+        digit_area = findViewById(R.id.digit_area);
+        digit_area.setOnLongClickListener(mojLongKlikListener());
+
         coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons); //listener do podpiecia na klawisze
+
         wygenerujButtony();
     }
 
+
+    OnLongClickListener mojLongKlikListener() {
+        return new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View v) {
+                Toast.makeText(MainActivity.this, "Dluuugi klik", Toast.LENGTH_SHORT).show();
+                Intent intUstawienia = new Intent("pl.autyzmsoft.liczykropka.UstawieniaActivity");
+                startActivity(intUstawienia);
+                return true;
+            }
+        };
+    }
+
+
+
     /***
-     * Zmina sposobu wyswietlania na buttonach; czyszczenie obszaru z cyfrą
+     * Zmina sposobu wyswietlania na buttonach; czyszczenie obszaru z cyfrą - tymczasowe
      */
     public void bPrzelaczKlik(View view) {
         for (final MojButton mb : tButtons) {
