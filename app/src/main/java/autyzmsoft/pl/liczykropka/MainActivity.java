@@ -1,5 +1,7 @@
 package autyzmsoft.pl.liczykropka;
 
+import static autyzmsoft.pl.liczykropka.ZmienneGlobalne.MAX_BTNS;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,7 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    int MAX_BTNS = 6;
+    ZmienneGlobalne mGlob;
+
     MojButton[] tButtons = new MojButton[MAX_BTNS];   //tablica buttonów z wyrazami
 
     LinearLayout   buttons_area;
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         calyEkran();
         //Set content view AFTER ABOVE sequence (calyEkran()) to avoid crash:
         setContentView(R.layout.activity_main);
+
+        mGlob = (ZmienneGlobalne) getApplication();
+
         buttons_area = findViewById(R.id.buttons_area);
 
         tvCyfra = findViewById(R.id.tvCyfra);
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons); //listener do podpiecia na klawisze, potem "podwieszenie" pod kazdy klawisz
 
         wygenerujButtony();
+
     }
 
 

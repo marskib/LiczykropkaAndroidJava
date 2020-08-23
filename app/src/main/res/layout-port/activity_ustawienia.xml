@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="USTAWIENIA"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +26,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/border_skib"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -37,6 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Liczba Klawiszy (1-6)"
+            android:textStyle="bold"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
