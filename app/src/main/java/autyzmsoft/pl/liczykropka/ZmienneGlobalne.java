@@ -20,8 +20,9 @@ import android.app.Application;
  */
 
 public class ZmienneGlobalne extends Application {
-    public final boolean PELNA_WERSJA = false;       //czy Pelna czy Darmowa wersja aplikacji
-    public static final int MAX_BTNS = 6;            //maksymalna dopuszczlna liczba klawiszy
+    public static final boolean PELNA_WERSJA = false;       //czy Pelna czy Darmowa wersja aplikacji
+    public int MAX_BTNS = 6;                                //maksymalna dopuszczlna liczba klawiszy
+    public boolean czyJakLiczba = false;                     //sposob zobrazowania na klawiszach - liczby/kolka
 
     @Override
     public void onCreate() {

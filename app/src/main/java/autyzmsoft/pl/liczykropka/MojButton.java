@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.util.TypedValue;
+import android.view.View;
 
 
 /**
@@ -34,6 +35,8 @@ public class MojButton extends androidx.appcompat.widget.AppCompatButton {
         this.setHeight(btnWys);
         this.setBackgroundColor(Color.GRAY);
         this.setTypeface(null, Typeface.BOLD);
+
+        setVisibility(View.INVISIBLE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             this.setLetterSpacing(0.4F);

@@ -23,7 +23,7 @@
 
         <activity
             android:name=".UstawieniaActivity"
-            android:label="@string/title_activity_ustawienia"
+            
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="pl.autyzmsoft.liczykropka.UstawieniaActivity"/>

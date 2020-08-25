@@ -1,16 +1,14 @@
 package autyzmsoft.pl.liczykropka;
 
-import static autyzmsoft.pl.liczykropka.ZmienneGlobalne.MAX_BTNS;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
     ZmienneGlobalne mGlob;
 
-    MojButton[] tButtons = new MojButton[MAX_BTNS];   //tablica buttonów z wyrazami
+    MojButton[] tButtons;            //tablica buttonów z cyframi/symbolami (kolkami)
 
     LinearLayout   buttons_area;
-    RelativeLayout digit_area;
+    LinearLayout digit_area;
 
     MojTextView tvCyfra;
 
@@ -30,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private int height   = 0;
     private int btH      = 0;
     private int width    = 0;
-
-    int lBtns = 6;   //aktualna liczba buttonow (z Ustawien)
 
     MojBtnListener coNaKlikNaBtn;                  //listener do podpiecia na klawisze
 
@@ -47,16 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
         mGlob = (ZmienneGlobalne) getApplication();
 
+        Toast.makeText(mGlob, "onCreate w MainActivity", Toast.LENGTH_SHORT).show();
+
         buttons_area = findViewById(R.id.buttons_area);
 
         tvCyfra = findViewById(R.id.tvCyfra);
 
         digit_area = findViewById(R.id.digit_area);
         digit_area.setOnLongClickListener(mojLongKlikListener());
-
-        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons); //listener do podpiecia na klawisze, potem "podwieszenie" pod kazdy klawisz
-
-        wygenerujButtony();
 
     }
 
@@ -75,19 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    /***
-     * Zmina sposobu wyswietlania na buttonach; czyszczenie obszaru z cyfrą - tymczasowe
-     */
-    public void bPrzelaczKlik(View view) {
-        for (final MojButton mb : tButtons) {
-            mb.setCzyJakLiczba(!mb.isCzyJakLiczba());
-            mb.setText(mb.dajWartoscStringowo());
-        }
-        tvCyfra.setText("");
-    }
-
-    /**
-     * Generuje lBts buttonow; zapamietuje w tablicy tButtons[]; pokazuje na ekranie
+      /**
+     * Generuje mGlob.MAX_BTNS buttonow; zapamietuje w tablicy tButtons[]; pokazuje na ekranie
      */
     public void wygenerujButtony() {
 
@@ -95,17 +78,28 @@ public class MainActivity extends AppCompatActivity {
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(0, lBtns);
+        MojGenerator mGen = new MojGenerator(1, 6);
 
-        for (int i=0; i< lBtns; i++) {
+        for (int i=0; i< mGlob.MAX_BTNS; i++) {
 
             try {
-                mb = new MojButton(this, mGen.dajWartUnikalna(), true, txSize, btH);
+                mb = new MojButton(this, mGen.dajWartUnikalna(), mGlob.czyJakLiczba, txSize, btH);
                 mb.setOnClickListener(coNaKlikNaBtn);
                 tButtons[i] = mb;
                 buttons_area.addView(tButtons[i]);
                 ustawMarginesy(tButtons[i]);
-                tButtons[i].setVisibility(View.VISIBLE); //za chwile pokaze z opoznieniem - efekciarstwo ;)
+
+                Handler h1 = new Handler();
+                final int iwew = i;
+                h1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tButtons[iwew].setVisibility(View.VISIBLE); //za chwile pokaze z opoznieniem - efekciarstwo ;)
+                        }
+                    } ,200*(iwew+1));
+
+
+                //tButtons[i].setVisibility(View.VISIBLE); //za chwile pokaze z opoznieniem - efekciarstwo ;)
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -117,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
         int dx = 10; //margin w pionie pomiedzy klawiszami (defaultowo)
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButton.getLayoutParams();// as LinearLayout.LayoutParams;
-        if (lBtns < 4) dx = 20;
+        if (mGlob.MAX_BTNS < 4) dx = 20;
         params.setMargins(0, dx, 0, 0);
         tButton.setLayoutParams(params);
     }
@@ -136,22 +130,22 @@ public class MainActivity extends AppCompatActivity {
             width = dm.widthPixels;
             height = dm.heightPixels;
 
-            if (lBtns <= 4) {
+            if (mGlob.MAX_BTNS <= 4) {
                 int lBtsRob = 2;
-                btH = height / (lBtsRob + 3); //bylo 2; button height; doswiadczalnie
+                btH = height / (lBtsRob + 3); //button height; doswiadczalnie
                 btH = btH - 0;
             }
-            if (lBtns == 5) {   // bo dobrze wyglada przy 5-ciu klawiszach:
+            if (mGlob.MAX_BTNS == 5) {   // bo dobrze wyglada przy 5-ciu klawiszach:
                 int lBtsRob = 4;
                 btH = height / (lBtsRob + 2); //button height; doswiadczalnie
             }
-            if (lBtns == 6) {
-                btH = height / (lBtns + 1);  //button height; doswiadczalnie
+            if (mGlob.MAX_BTNS == 6) {
+                btH = height / (mGlob.MAX_BTNS + 1);  //button height; doswiadczalnie
             }
             txSize = (float) (btH / 3.5);
 
             //podrasowanie  - 2020.07.16:
-            switch(lBtns) {
+            switch(mGlob.MAX_BTNS) {
                 case 6: btH = (int) (btH / 1.30); break;
                 case 5: btH = (int) (btH / 1.25); break;
                 default: btH = (int) (btH / 1.20); break;
@@ -170,4 +164,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(mGlob, "onResume w MainActivity", Toast.LENGTH_SHORT).show();
+
+        wyczyscPrzedpole();
+
+        tButtons = new MojButton[mGlob.MAX_BTNS];              //tworzenie tablicy, zeby miec na czym dzialac
+        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons);  //listener do podpiecia na klawisze, potem "podwieszenie" pod kazdy klawisz
+
+        wygenerujButtony();
+
+    }
+
+    private void wyczyscPrzedpole() {
+        buttons_area.removeAllViews();
+    }
 }
