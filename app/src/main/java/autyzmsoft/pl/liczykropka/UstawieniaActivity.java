@@ -1,6 +1,8 @@
 package autyzmsoft.pl.liczykropka;
 
 
+import static autyzmsoft.pl.liczykropka.ZmienneGlobalne.MAX_BTNS;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,20 +15,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class UstawieniaActivity extends AppCompatActivity {
 
-
     ZmienneGlobalne mGlob;
+
+    TextView    tv_lkl;
+    RadioButton rb_cyfry;
+    RadioButton rb_kolka;
+    RadioButton rb_trening;
+    RadioButton rb_nauka;
+
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         //Uwaga - wywoluje sie rowniez po wejsciu z MainActivity przez LongClick na obrazku(!)
         super.onCreate(savedInstanceState);
 
-
         //Na caly ekran:
         //1.Remove title bar:
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //2.Remove notification bar:
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         //3.Set content view AFTER ABOVE sequence (to avoid crash):
 
         setContentView(R.layout.activity_ustawienia);
@@ -34,11 +42,15 @@ public class UstawieniaActivity extends AppCompatActivity {
         //pobranie zmiennych globalnych (ustawien):
         mGlob = (ZmienneGlobalne) getApplication();
 
+        //uchwyty do kontrolek:
+        tv_lkl     = (TextView)    findViewById(R.id.tv_lkl);
+        rb_cyfry   = (RadioButton) findViewById(R.id.rb_cyfry);
+        rb_kolka   = (RadioButton) findViewById(R.id.rb_kolka);
+        rb_trening = (RadioButton) findViewById(R.id.rb_trening);
+        rb_nauka   = (RadioButton) findViewById(R.id.rb_nauka);
 
-        //na caly ekran:
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
 
     @Override
     protected void onResume() {
@@ -52,35 +64,42 @@ public class UstawieniaActivity extends AppCompatActivity {
         ustawKontrolki();
     }
 
+    public void bOkKlik(View view) {
+        finish();
+    }
+
 
     private void ustawKontrolki() {
         /*******************************************************************************************/
-        //Ustawienie kontrolek na layoucie splash.xml na wartosci inicjacyjne ze ZmiennychGlobalnych
+        //Ustawienie kontrolek na layoucie splash.xml na wartosci inicjacyjne ze <-- ZmiennychGlobalnych
         /*******************************************************************************************/
+        //
+        tv_lkl.setText(Integer.toString(mGlob.LBTNS));
 
-        ((TextView) findViewById(R.id.tv_lkl)).setText(Integer.toString(mGlob.MAX_BTNS));
-        ((RadioButton) findViewById(R.id.rb_cyfry)).setChecked(mGlob.czyJakLiczba);
-        ((RadioButton) findViewById(R.id.rb_kolka)).setChecked(!mGlob.czyJakLiczba);
+        rb_cyfry.setChecked(mGlob.czyJakLiczba);
+        rb_kolka.setChecked(!mGlob.czyJakLiczba);
+
+        rb_trening.setChecked(mGlob.czyTrening);
+        rb_nauka.setChecked(!mGlob.czyTrening);
     }
 
+
     public void bMinusKlik(View view) {
-        TextView tv = (TextView) findViewById(R.id.tv_lkl);
-        int level = Integer.parseInt(tv.getText().toString());
+        int level = Integer.parseInt(tv_lkl.getText().toString());
         level--;
         if (level==0) { //zapewniam zakres od 1..6
             level=1;
         }
-        tv.setText(Integer.toString(level));
+        tv_lkl.setText(Integer.toString(level));
     }
 
     public void bPlusKlik(View view) {
-        TextView tv = (TextView) findViewById(R.id.tv_lkl);
-        int level = Integer.parseInt(tv.getText().toString());
+        int level = Integer.parseInt(tv_lkl.getText().toString());
         level++;
-        if (level==7) { //zapewniam zakres od 1..6
-            level=6;
+        if (level== MAX_BTNS+1) { //zapewniam zakres od 1..6
+            level = MAX_BTNS;
         }
-        tv.setText(Integer.toString(level));
+        tv_lkl.setText(Integer.toString(level));
     }
 
     @Override
@@ -90,12 +109,11 @@ public class UstawieniaActivity extends AppCompatActivity {
         //*******************************************//
         super.onPause();
 
-        TextView tv = (TextView) findViewById(R.id.tv_lkl);
-        int rob = Integer.valueOf(tv.getText().toString());
-        mGlob.MAX_BTNS = rob;
+        int rob = Integer.valueOf(tv_lkl.getText().toString());
+        mGlob.LBTNS = rob;
 
-        RadioButton rb = (RadioButton) findViewById(R.id.rb_cyfry);
-        mGlob.czyJakLiczba = rb.isChecked();
+        mGlob.czyJakLiczba = rb_cyfry.isChecked();
+        mGlob.czyTrening = rb_trening.isChecked();
 
         Toast.makeText(this, "onPause w UstawieniaActivity", Toast.LENGTH_SHORT).show();
     }

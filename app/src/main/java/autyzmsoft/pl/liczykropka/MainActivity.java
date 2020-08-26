@@ -2,7 +2,6 @@ package autyzmsoft.pl.liczykropka;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
 
       /**
-     * Generuje mGlob.MAX_BTNS buttonow; zapamietuje w tablicy tButtons[]; pokazuje na ekranie
+     * Generuje mGlob.lbtns buttonow; zapamietuje w tablicy tButtons[]; pokazuje na ekranie
      */
     public void wygenerujButtony() {
 
@@ -78,9 +77,9 @@ public class MainActivity extends AppCompatActivity {
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(1, 6);
+        MojGenerator mGen = new MojGenerator(0, 6);
 
-        for (int i=0; i< mGlob.MAX_BTNS; i++) {
+        for (int i=0; i< mGlob.LBTNS; i++) {
 
             try {
                 mb = new MojButton(this, mGen.dajWartUnikalna(), mGlob.czyJakLiczba, txSize, btH);
@@ -88,18 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 tButtons[i] = mb;
                 buttons_area.addView(tButtons[i]);
                 ustawMarginesy(tButtons[i]);
-
-                Handler h1 = new Handler();
-                final int iwew = i;
-                h1.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        tButtons[iwew].setVisibility(View.VISIBLE); //za chwile pokaze z opoznieniem - efekciarstwo ;)
-                        }
-                    } ,200*(iwew+1));
-
-
-                //tButtons[i].setVisibility(View.VISIBLE); //za chwile pokaze z opoznieniem - efekciarstwo ;)
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -111,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
         int dx = 10; //margin w pionie pomiedzy klawiszami (defaultowo)
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButton.getLayoutParams();// as LinearLayout.LayoutParams;
-        if (mGlob.MAX_BTNS < 4) dx = 20;
+        if (mGlob.LBTNS < 4) dx = 20;
         params.setMargins(0, dx, 0, 0);
         tButton.setLayoutParams(params);
     }
@@ -130,22 +117,22 @@ public class MainActivity extends AppCompatActivity {
             width = dm.widthPixels;
             height = dm.heightPixels;
 
-            if (mGlob.MAX_BTNS <= 4) {
+            if (mGlob.LBTNS <= 4) {
                 int lBtsRob = 2;
                 btH = height / (lBtsRob + 3); //button height; doswiadczalnie
                 btH = btH - 0;
             }
-            if (mGlob.MAX_BTNS == 5) {   // bo dobrze wyglada przy 5-ciu klawiszach:
+            if (mGlob.LBTNS == 5) {   // bo dobrze wyglada przy 5-ciu klawiszach:
                 int lBtsRob = 4;
                 btH = height / (lBtsRob + 2); //button height; doswiadczalnie
             }
-            if (mGlob.MAX_BTNS == 6) {
-                btH = height / (mGlob.MAX_BTNS + 1);  //button height; doswiadczalnie
+            if (mGlob.LBTNS == 6) {
+                btH = height / (mGlob.LBTNS + 1);  //button height; doswiadczalnie
             }
             txSize = (float) (btH / 3.5);
 
             //podrasowanie  - 2020.07.16:
-            switch(mGlob.MAX_BTNS) {
+            switch(mGlob.LBTNS) {
                 case 6: btH = (int) (btH / 1.30); break;
                 case 5: btH = (int) (btH / 1.25); break;
                 default: btH = (int) (btH / 1.20); break;
@@ -171,10 +158,15 @@ public class MainActivity extends AppCompatActivity {
 
         wyczyscPrzedpole();
 
-        tButtons = new MojButton[mGlob.MAX_BTNS];              //tworzenie tablicy, zeby miec na czym dzialac
+        tButtons = new MojButton[mGlob.LBTNS];              //tworzenie tablicy, zeby miec na czym dzialac
         coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons);  //listener do podpiecia na klawisze, potem "podwieszenie" pod kazdy klawisz
 
         wygenerujButtony();
+
+        if (!mGlob.czyTrening) {
+            int wylosBtn = MojGenerator.getRandomNumberInRange(0,mGlob.LBTNS-1);; //  <-- wylosuj button sposrod uwidocznionych na ekranie
+            tvCyfra.pokaz(tButtons[wylosBtn]);
+        }
 
     }
 

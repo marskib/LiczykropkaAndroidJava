@@ -21,11 +21,21 @@ import android.app.Application;
 
 public class ZmienneGlobalne extends Application {
     public static final boolean PELNA_WERSJA = false;       //czy Pelna czy Darmowa wersja aplikacji
-    public int MAX_BTNS = 6;                                //maksymalna dopuszczlna liczba klawiszy
-    public boolean czyJakLiczba = false;                     //sposob zobrazowania na klawiszach - liczby/kolka
+    public static final int MAX_BTNS = 6;                   //maksymalna dopuszczlna liczba klawiszy
+
+    public boolean czyJakLiczba;                 //sposob zobrazowania na klawiszach - liczby/kolka
+    public int LBTNS;                            //maksymalna dopuszczlna liczba klawiszy
+    public boolean czyTrening;                   //czy jestesmy w trybie Treninu czy Nauki
 
     @Override
     public void onCreate() {
         super.onCreate();
+        ustawParametryDefault();
+    }
+
+    private void ustawParametryDefault() {
+        LBTNS = 6;
+        czyJakLiczba = false;
+        czyTrening = true;
     }
 }
