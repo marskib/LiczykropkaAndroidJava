@@ -9,7 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -115,7 +114,7 @@ public class UstawieniaActivity extends AppCompatActivity {
         mGlob.czyJakLiczba = rb_cyfry.isChecked();
         mGlob.czyTrening = rb_trening.isChecked();
 
-        Toast.makeText(this, "onPause w UstawieniaActivity", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "onPause w UstawieniaActivity", Toast.LENGTH_SHORT).show();
     }
 
 

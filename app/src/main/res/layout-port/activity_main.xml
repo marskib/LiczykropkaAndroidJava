@@ -17,7 +17,7 @@
         android:background="@drawable/border_skib"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="2">
 
         <autyzmsoft.pl.liczykropka.MojTextView
             android:id="@+id/tvCyfra"
@@ -35,28 +35,41 @@
 
     <LinearLayout
         android:id="@+id/buttons_area"
-        android:background="@drawable/border_skib"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="7"
         android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/brzeg_margin">
 
 <!--  tutaj zostanie programowa wygenerowane do 6-ciu buttonow MojButtom
         <Button
-            android:id="@+id/b1"
-            android:tag="b1"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="*"
-            android:background="@color/colorAAAAAA">
+            android:id="@+id/..."
         </Button>
-&lt;!&ndash;        android:layout_weight="1"&ndash;&gt;
-
-
 -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bdalej_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bAgain"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="bAgainOnKlik"
+            android:text="Again" />
+
+        <Button
+            android:id="@+id/bDalej"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="------>"
+            android:onClick="bDalejOnKlik"/>
 
     </LinearLayout>
 

@@ -2,7 +2,7 @@
 
 <resources>
     <dimen name="brzeg_margin">30dp</dimen>
-    <dimen name="cyfra_size">40sp</dimen>
+    <dimen name="cyfra_size">20sp</dimen>
     <dimen name="tvInstrukcja_size">35sp</dimen>
 
 

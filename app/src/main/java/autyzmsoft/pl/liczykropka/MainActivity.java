@@ -2,13 +2,13 @@ package autyzmsoft.pl.liczykropka;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         mGlob = (ZmienneGlobalne) getApplication();
 
-        Toast.makeText(mGlob, "onCreate w MainActivity", Toast.LENGTH_SHORT).show();
-
         buttons_area = findViewById(R.id.buttons_area);
 
         tvCyfra = findViewById(R.id.tvCyfra);
@@ -54,11 +52,76 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void bAgainOnKlik(View view) {
+        powtorzUklad();
+    }
+
+
+    /***
+     * Powtorka ćwiczenia/sytuacji treningowej.
+     * Nie zmienia sie uklad na klawiszach.
+     * Cyfra/kolka na gorze - wymazana jesli trening, zostaje jesli cwiczenie
+     */
+    private void powtorzUklad() {
+
+        if (mGlob.czyTrening) tvCyfra.wymaz();
+        for (final MojButton mb : tButtons) {
+            mb.setEnabled(true);
+            mb.restoreInitialTextSize();
+        }
+    }
+
+    public void bDalejOnKlik(View view) {
+        wyczyscPrzedpole();
+
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                wygenerujUklad();
+                if (mGlob.czyTrening) return;
+                dajCwiczenie();
+            }
+        },400);
+    }
+
+    /***
+     * Generacja (NOWEGO) losowego ukladu klawiszy.
+     * Uwaga - nie okreslam jeszcze "cwiczenia", czyli zwycieskiego klawisz/cyfry na gorze itp.
+     */
+    private void wygenerujUklad() {
+        //Tworzenie tablicy, zeby miec na czym dzialac:
+        tButtons = new MojButton[mGlob.LBTNS];
+        //Listener do podpiecia na klawisze, potem "podwieszenie" pod kazdy klawisz:
+        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons);
+        //
+        wygenerujButtony();
+    }
+
+    /***
+     * Okreslenie 'parametrow' cwiczenia - czyli 'pytania' i związanego z nim zwycieskiego klawisza; generowanie cyfry/kolek na gorze ekranu.
+     * Uwaga - nie ma tutaj tworzenia klawiszy
+     */
+    private void dajCwiczenie() {
+       int wylosBtn = MojGenerator.getRandomNumberInRange(0,mGlob.LBTNS-1);; //  <-- wylosuj button sposrod uwidocznionych na ekranie
+       MojButton naPdst = tButtons[wylosBtn]; //dla lepszej czytelnosci
+       tvCyfra.pokaz(naPdst);
+       blokujListeneryOprocz(naPdst);
+    }
+
+    private void blokujListeneryOprocz(final MojButton bExcept) {
+        for (final MojButton mb : tButtons) {
+            if (mb != bExcept) {
+                mb.setClickable(false);
+            }
+        }
+    }
+
+
     OnLongClickListener mojLongKlikListener() {
         return new OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
-                Toast.makeText(MainActivity.this, "Dluuugi klik", Toast.LENGTH_SHORT).show();
                 Intent intUstawienia = new Intent("pl.autyzmsoft.liczykropka.UstawieniaActivity");
                 startActivity(intUstawienia);
                 return true;
@@ -69,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
 
       /**
-     * Generuje mGlob.lbtns buttonow; zapamietuje w tablicy tButtons[]; pokazuje na ekranie
+     * Generuje mGlob.LBTNS buttonow; zapamietuje w tablicy tButtons[]; pokazuje na ekranie
      */
     public void wygenerujButtony() {
 
@@ -154,23 +217,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(mGlob, "onResume w MainActivity", Toast.LENGTH_SHORT).show();
-
-        wyczyscPrzedpole();
-
-        tButtons = new MojButton[mGlob.LBTNS];              //tworzenie tablicy, zeby miec na czym dzialac
-        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons);  //listener do podpiecia na klawisze, potem "podwieszenie" pod kazdy klawisz
-
-        wygenerujButtony();
-
-        if (!mGlob.czyTrening) {
-            int wylosBtn = MojGenerator.getRandomNumberInRange(0,mGlob.LBTNS-1);; //  <-- wylosuj button sposrod uwidocznionych na ekranie
-            tvCyfra.pokaz(tButtons[wylosBtn]);
-        }
-
+        //Toast.makeText(mGlob, "onResume w MainActivity", Toast.LENGTH_SHORT).show();
+        bDalejOnKlik(null);
     }
 
     private void wyczyscPrzedpole() {
+        tvCyfra.wymaz();
         buttons_area.removeAllViews();
     }
 }

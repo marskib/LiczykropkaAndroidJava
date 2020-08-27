@@ -36,6 +36,6 @@ public class ZmienneGlobalne extends Application {
     private void ustawParametryDefault() {
         LBTNS = 6;
         czyJakLiczba = false;
-        czyTrening = true;
+        czyTrening = false;
     }
 }

@@ -4,7 +4,6 @@ import static android.util.TypedValue.COMPLEX_UNIT_PX;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Handler;
 import android.util.AttributeSet;
 
 /***
@@ -45,17 +44,13 @@ public class MojTextView extends androidx.appcompat.widget.AppCompatTextView  {
     }
 
     /***
-     * Po 'chwili' zawartosc tvCyfra znika.
-     * @param chwila
+     * zawartosc tvCyfra znika.
      */
-    public void wymaz(final int chwila) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                MojTextView.this.setText(" ");  //lepiej zostawic spacje niz pusty znak, bo appium/espresso nie zobaczy....
-            }
-        },chwila);
+    public void wymaz() {
+        this.setText(" ");  //lepiej zostawic spacje niz pusty znak, bo appium/espresso nie zobaczy....
     }
+
+
 
 
 }
