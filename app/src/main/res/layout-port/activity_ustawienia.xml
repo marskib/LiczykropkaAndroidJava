@@ -49,11 +49,11 @@
             android:id="@+id/b_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
+            android:background="@android:drawable/btn_minus"
+            android:onClick="bMinusKlik"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tytul_lkl"
             app:layout_constraintEnd_toStartOf="@id/tv_lkl"
-            android:onClick="bMinusKlik"/>
+            app:layout_constraintTop_toBottomOf="@id/tytul_lkl" />
 
         <TextView
             android:id="@+id/tv_lkl"
@@ -74,11 +74,11 @@
             android:id="@+id/b_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+"
+            android:background="@android:drawable/btn_plus"
+            android:onClick="bPlusKlik"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tytul_lkl"
             app:layout_constraintStart_toEndOf="@id/tv_lkl"
-            android:onClick="bPlusKlik"/>
+            app:layout_constraintTop_toBottomOf="@id/tytul_lkl" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -116,17 +116,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <RadioButton
-            android:id="@+id/rb_kolka"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Kółka"
-            android:textSize="30sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rb_cyfry"
-            />
+            <RadioButton
+                android:id="@+id/rb_kolka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Kółka"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rb_cyfry" />
 
         </RadioGroup>
 
@@ -141,7 +140,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/border_skib"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -149,6 +147,8 @@
 
 
             <RadioGroup
+                android:id="@+id/rg_tryby"
+                android:background="@drawable/border_skib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -179,8 +179,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rb_cyfry"
                     />
-
             </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/cb_zero"
+                android:checked="false"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="z cyfrą Zero"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rg_tryby"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -192,5 +202,6 @@
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:onClick="bOkKlik"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

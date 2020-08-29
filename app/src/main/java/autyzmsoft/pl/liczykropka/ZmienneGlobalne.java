@@ -22,10 +22,12 @@ import android.app.Application;
 public class ZmienneGlobalne extends Application {
     public static final boolean PELNA_WERSJA = false;       //czy Pelna czy Darmowa wersja aplikacji
     public static final int MAX_BTNS = 6;                   //maksymalna dopuszczlna liczba klawiszy
+    public static final int MAX_LICZBA = MAX_BTNS;          //maksymalna generowana liczba (nie robic wiecej niz 6-malo miejsca)
 
     public boolean czyJakLiczba;                 //sposob zobrazowania na klawiszach - liczby/kolka
     public int LBTNS;                            //maksymalna dopuszczlna liczba klawiszy
     public boolean czyTrening;                   //czy jestesmy w trybie Treninu czy Nauki
+    public boolean czyZero;                      //czy w cwiczeniach moze wystąpic liczba 0 Zero
 
     @Override
     public void onCreate() {
@@ -37,5 +39,6 @@ public class ZmienneGlobalne extends Application {
         LBTNS = 6;
         czyJakLiczba = false;
         czyTrening = false;
+        czyZero = false;
     }
 }

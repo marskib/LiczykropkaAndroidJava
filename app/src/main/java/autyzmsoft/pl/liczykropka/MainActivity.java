@@ -1,8 +1,11 @@
 package autyzmsoft.pl.liczykropka;
 
+import static autyzmsoft.pl.liczykropka.ZmienneGlobalne.MAX_LICZBA;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -18,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
     MojButton[] tButtons;            //tablica buttonów z cyframi/symbolami (kolkami)
 
-    LinearLayout   buttons_area;
+    LinearLayout buttons_area;
     LinearLayout digit_area;
+    LinearLayout nawigacja_area;
 
     MojTextView tvCyfra;
 
@@ -29,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private int width    = 0;
 
     MojBtnListener coNaKlikNaBtn;                  //listener do podpiecia na klawisze
-
-
 
 
     @Override
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         mGlob = (ZmienneGlobalne) getApplication();
 
         buttons_area = findViewById(R.id.buttons_area);
+        nawigacja_area = findViewById(R.id.nawigacja_area);
 
         tvCyfra = findViewById(R.id.tvCyfra);
 
@@ -52,9 +55,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void bAgainOnKlik(View view) {
-        powtorzUklad();
-    }
+
+    public void bAgainOnKlik(View view) {powtorzUklad();}
 
 
     /***
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         //Tworzenie tablicy, zeby miec na czym dzialac:
         tButtons = new MojButton[mGlob.LBTNS];
         //Listener do podpiecia na klawisze, potem "podwieszenie" pod kazdy klawisz:
-        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons);
+        coNaKlikNaBtn = new MojBtnListener(tvCyfra,tButtons, nawigacja_area);
         //
         wygenerujButtony();
     }
@@ -140,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
         //
         oszacujWysokoscButtonow_i_Tekstu();
         //
-        MojGenerator mGen = new MojGenerator(0, 6);
+        int min = (mGlob.czyZero) ? 0 : 1;
+        MojGenerator mGen = new MojGenerator(min, MAX_LICZBA);
 
         for (int i=0; i< mGlob.LBTNS; i++) {
 
@@ -183,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
             if (mGlob.LBTNS <= 4) {
                 int lBtsRob = 2;
                 btH = height / (lBtsRob + 3); //button height; doswiadczalnie
-                btH = btH - 0;
             }
             if (mGlob.LBTNS == 5) {   // bo dobrze wyglada przy 5-ciu klawiszach:
                 int lBtsRob = 4;
@@ -224,5 +226,6 @@ public class MainActivity extends AppCompatActivity {
     private void wyczyscPrzedpole() {
         tvCyfra.wymaz();
         buttons_area.removeAllViews();
+        nawigacja_area.setVisibility(View.INVISIBLE);
     }
 }

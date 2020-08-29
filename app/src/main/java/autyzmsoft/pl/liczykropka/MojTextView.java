@@ -52,5 +52,4 @@ public class MojTextView extends androidx.appcompat.widget.AppCompatTextView  {
 
 
 
-
 }

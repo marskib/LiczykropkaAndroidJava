@@ -1,12 +1,11 @@
 package autyzmsoft.pl.liczykropka;
 
 
-import static autyzmsoft.pl.liczykropka.ZmienneGlobalne.MAX_BTNS;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
@@ -21,6 +20,7 @@ public class UstawieniaActivity extends AppCompatActivity {
     RadioButton rb_kolka;
     RadioButton rb_trening;
     RadioButton rb_nauka;
+    CheckBox    cb_zero;
 
 
     @Override
@@ -41,13 +41,17 @@ public class UstawieniaActivity extends AppCompatActivity {
         //pobranie zmiennych globalnych (ustawien):
         mGlob = (ZmienneGlobalne) getApplication();
 
+        dajUchwytyDoKontrolek();
+    }
+
+    private void dajUchwytyDoKontrolek() {
         //uchwyty do kontrolek:
         tv_lkl     = (TextView)    findViewById(R.id.tv_lkl);
         rb_cyfry   = (RadioButton) findViewById(R.id.rb_cyfry);
         rb_kolka   = (RadioButton) findViewById(R.id.rb_kolka);
         rb_trening = (RadioButton) findViewById(R.id.rb_trening);
         rb_nauka   = (RadioButton) findViewById(R.id.rb_nauka);
-
+        cb_zero    = (CheckBox)    findViewById(R.id.cb_zero);
     }
 
 
@@ -80,6 +84,8 @@ public class UstawieniaActivity extends AppCompatActivity {
 
         rb_trening.setChecked(mGlob.czyTrening);
         rb_nauka.setChecked(!mGlob.czyTrening);
+
+        cb_zero.setChecked(mGlob.czyZero);
     }
 
 
@@ -95,8 +101,8 @@ public class UstawieniaActivity extends AppCompatActivity {
     public void bPlusKlik(View view) {
         int level = Integer.parseInt(tv_lkl.getText().toString());
         level++;
-        if (level== MAX_BTNS+1) { //zapewniam zakres od 1..6
-            level = MAX_BTNS;
+        if (level== ZmienneGlobalne.MAX_BTNS+1) { //zapewniam zakres od 1..6
+            level = ZmienneGlobalne.MAX_BTNS;
         }
         tv_lkl.setText(Integer.toString(level));
     }
@@ -113,6 +119,8 @@ public class UstawieniaActivity extends AppCompatActivity {
 
         mGlob.czyJakLiczba = rb_cyfry.isChecked();
         mGlob.czyTrening = rb_trening.isChecked();
+
+        mGlob.czyZero = cb_zero.isChecked();
 
 //        Toast.makeText(this, "onPause w UstawieniaActivity", Toast.LENGTH_SHORT).show();
     }
