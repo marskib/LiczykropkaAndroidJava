@@ -2,11 +2,8 @@ package autyzmsoft.pl.liczykropka;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import android.content.Context;
@@ -63,6 +60,7 @@ public class MojInstrumentedTest {
     public void tvCyfra_sie_pojawia() throws Exception {
         onView(withId(R.id.tvCyfra)).check(matches(isDisplayed()));
     }
+/*
 
     @Test
     public void bPrzelacz_sie_pojawia() throws Exception {
@@ -73,14 +71,21 @@ public class MojInstrumentedTest {
     public void tvProbny_sie_pojawia() throws Exception {
         onView(withId(R.id.tvProbny)).check(matches(isDisplayed()));
     }
+*/
 
-//    @Test
-//    public void moje_buttony_sie_pojawiaja() throws Exception {
-//        for (final MojButton tButton : MainActivity.tButtons) {
-//            onView(withId(R.id.tButton)).check(matches(isDisplayed()));
-//
-//        }
-//    }
+    @Test
+    public void moje_buttony_sie_pojawiaja() throws Exception {
+        onView(withId(R.id.mb1)).check(matches(isDisplayed()));
+        onView(withId(R.id.mb2)).check(matches(isDisplayed()));
+        onView(withId(R.id.mb3)).check(matches(isDisplayed()));
+        onView(withId(R.id.mb4)).check(matches(isDisplayed()));
+        onView(withId(R.id.mb5)).check(matches(isDisplayed()));
+
+        uwaga - lapie do przedostatniego...
+
+        onView(withId(R.id.mb6)).check(matches(isDisplayed()));
+
+    }
 
  /*   @Test
     public void proba() {
@@ -125,7 +130,7 @@ public class MojInstrumentedTest {
 
      //AssertThat(bArea.check(hasDescendant(withClassName(containsString("MojButton")))),iss);
 
-     onView(hasDescendant(withClassName(containsString("MojButton")))).isDi
+     //onView(hasDescendant(withClassName(containsString("MojButton")))).isDi
 
 
  }

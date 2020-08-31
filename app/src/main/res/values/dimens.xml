@@ -17,4 +17,6 @@
 
     <dimen name="tvPoziom_size">28dp</dimen>
 
+    <dimen name="arrow_padding_left">80dp</dimen>
+
 </resources>

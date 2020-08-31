@@ -2,4 +2,5 @@
 
 <resources>
     <dimen name="cyfra_size">22sp</dimen>
+    <dimen name="arrow_padding_left">220dp</dimen>
 </resources>

@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
        MojButton naPdst = tButtons[wylosBtn]; //dla lepszej czytelnosci
        tvCyfra.pokaz(naPdst);
        blokujListeneryOprocz(naPdst);
+
     }
 
     private void blokujListeneryOprocz(final MojButton bExcept) {
@@ -157,7 +158,27 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        nadajIdButtonom();
     } //koniec Funkcji
+
+    /***
+     * Nadaje programowom utworzonym buttonom nazwy
+     * Z punktu widzenia aplikacji nie jest to potrzebne(!),
+     * ale przydatne w testowania Espresso - mamy uchwyty do buttonow
+     * Korzysta z utworzonego recznie ids.xml w res.
+     */
+    private void nadajIdButtonom() {
+        for (int i = 0; i < tButtons.length-1; i++) {
+            switch (i) {
+                case 0: tButtons[i].setId(R.id.mb1);break;
+                case 1: tButtons[i].setId(R.id.mb2);break;
+                case 2: tButtons[i].setId(R.id.mb3);break;
+                case 3: tButtons[i].setId(R.id.mb4);break;
+                case 4: tButtons[i].setId(R.id.mb5);break;
+                case 5: tButtons[i].setId(R.id.mb6);break;
+            }
+        }
+    }
 
 
     private void ustawMarginesy(final MojButton tButton) {
