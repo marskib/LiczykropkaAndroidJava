@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
      * Korzysta z utworzonego recznie ids.xml w res.
      */
     private void nadajIdButtonom() {
-        for (int i = 0; i < tButtons.length-1; i++) {
+        for (int i = 0; i < tButtons.length; i++) {
             switch (i) {
                 case 0: tButtons[i].setId(R.id.mb1);break;
                 case 1: tButtons[i].setId(R.id.mb2);break;

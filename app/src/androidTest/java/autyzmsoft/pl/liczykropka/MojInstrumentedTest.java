@@ -1,9 +1,11 @@
 package autyzmsoft.pl.liczykropka;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 import android.content.Context;
@@ -80,12 +82,26 @@ public class MojInstrumentedTest {
         onView(withId(R.id.mb3)).check(matches(isDisplayed()));
         onView(withId(R.id.mb4)).check(matches(isDisplayed()));
         onView(withId(R.id.mb5)).check(matches(isDisplayed()));
-
-        uwaga - lapie do przedostatniego...
-
         onView(withId(R.id.mb6)).check(matches(isDisplayed()));
-
     }
+
+    @Test
+    public void naciskam_mb1() throws Exception {
+        onView(withId(R.id.mb1)).perform(click());
+        onView(withId(R.id.tvCyfra)).check(matches(isDisplayed()));
+       /*
+        assertThat(
+        onView(withId(R.id.tvCyfra)).check(matches(withText("0")))||
+        onView(withId(R.id.tvCyfra)).check(matches(withText("1")))||
+        onView(withId(R.id.tvCyfra)).check(matches(withText("2")))||
+        onView(withId(R.id.tvCyfra)).check(matches(withText("3")))||
+        onView(withId(R.id.tvCyfra)).check(matches(withText("4")))||
+        onView(withId(R.id.tvCyfra)).check(matches(withText("5")))||
+        onView(withId(R.id.tvCyfra)).check(matches(withText("6")))
+        );
+*/
+    }
+
 
  /*   @Test
     public void proba() {
