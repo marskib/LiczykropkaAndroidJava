@@ -9,9 +9,6 @@
 
 
 
-    <!--        android:background="@drawable/border_skib"-->
-
-
     <LinearLayout
         android:id="@+id/digit_area"
         android:layout_width="match_parent"
@@ -19,6 +16,8 @@
         android:layout_weight="6"
         android:background="#C9D6DAC1"
         android:gravity="center"
+
+android:layout_marginBottom="0dp"
         android:orientation="vertical">
 
         <autyzmsoft.pl.liczykropka.MojTextView
@@ -41,6 +40,9 @@
         android:layout_height="0dp"
         android:layout_weight="26"
         android:orientation="vertical"
+
+        android:background="@drawable/border_skib"
+
         android:layout_marginHorizontal="@dimen/brzeg_margin"
         android:layout_marginBottom="0dp">
 
@@ -58,6 +60,9 @@
         android:layout_marginTop="0dp"
         android:layout_weight="5"
         android:orientation="horizontal"
+
+        android:background="@drawable/border_skib"
+
         android:visibility="invisible">
 
         <Button

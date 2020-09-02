@@ -142,7 +142,7 @@ public class MojInstrumentedTest {
 //    onView(anyOf(withClassName(containsString("MojButton")))).check(matches(isDisplayed()));
    // anyOf(withClassName(containsString("MojButton")))).isD
 
-     ViewInteraction bArea = onView(withId(R.id.buttons_area));
+     ViewInteraction bArea = onView(withId(R.id.buttons_area).hasChild ???);
 
      //AssertThat(bArea.check(hasDescendant(withClassName(containsString("MojButton")))),iss);
 
