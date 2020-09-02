@@ -5,14 +5,17 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.runner.lifecycle.Stage.RESUMED;
 import static org.junit.Assert.*;
 
+import android.app.Activity;
 import android.content.Context;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import java.util.Collection;
 import org.junit.*;
 import org.junit.runner.*;
 
@@ -36,7 +39,7 @@ public class MojInstrumentedTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Context appContext = getInstrumentation().getTargetContext();
         assertEquals("autyzmsoft.pl.liczykropka", appContext.getPackageName());
     }
 
@@ -142,7 +145,9 @@ public class MojInstrumentedTest {
 //    onView(anyOf(withClassName(containsString("MojButton")))).check(matches(isDisplayed()));
    // anyOf(withClassName(containsString("MojButton")))).isD
 
-     ViewInteraction bArea = onView(withId(R.id.buttons_area).hasChild ???);
+     ViewInteraction bArea = onView(withId(R.id.buttons_area));
+
+     //bArea.chec
 
      //AssertThat(bArea.check(hasDescendant(withClassName(containsString("MojButton")))),iss);
 
@@ -152,6 +157,29 @@ public class MojInstrumentedTest {
  }
 
 
+    Activity currentActivity = null;
+
+    public Activity getActivityInstance(){
+        getInstrumentation().runOnMainSync(new Runnable() {
+            public void run() {
+                Collection resumedActivities =
+                        ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(RESUMED);
+                if (resumedActivities.iterator().hasNext()){
+                    currentActivity = (Activity) resumedActivities.iterator().next();
+                }
+            }
+        });
+
+        return currentActivity;
+    }
+
+
+    @Test
+    public void SkibuseAppContext() throws Exception {
+        MainActivity activity = rule.getActivity();
+        activity.wygenerujButtony();
+        // do more
+    }
 
 
 } //koniec klasy
