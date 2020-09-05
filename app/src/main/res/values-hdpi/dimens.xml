@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="cyfra_size">22sp</dimen>
+    <dimen name="arrow_padding_left">120dp</dimen>
+
+    <dimen name="rb_text_size">40sp</dimen>
+
+    <dimen name="rg_padding">10dp</dimen>
+
+
+</resources>

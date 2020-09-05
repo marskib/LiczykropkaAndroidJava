@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fadeScrollbars="false"
     android:scrollbars="vertical"
+    android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
 
 <!--    android:background="@color/colorAccent"-->
@@ -16,34 +17,30 @@
         android:layout_height="wrap_content"
         android:text="USTAWIENIA"
         android:paddingBottom="10dp"
-        android:paddingTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingTop="15dp"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lkl_area"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tytul_lkl"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_skib"
+        android:layout_gravity="center_horizontal"
+        android:text="Liczba Klawiszy (1-6)"
+        android:textStyle="bold"
+        android:textSize="20sp"
+    />
+
+    <LinearLayout
+        android:id="@+id/lkl_area"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_skib_red"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tytul_ustawienia">
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/tytul_lkl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Liczba Klawiszy (1-6)"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+
 
         <Button
             android:id="@+id/b_minus"
@@ -52,8 +49,7 @@
             android:background="@android:drawable/btn_minus"
             android:onClick="bMinusKlik"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/tv_lkl"
-            app:layout_constraintTop_toBottomOf="@id/tytul_lkl" />
+        />
 
         <TextView
             android:id="@+id/tv_lkl"
@@ -63,11 +59,9 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingBottom="5dp"
-            android:textSize="30sp"
+            android:textSize="@dimen/rb_text_size"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+        />
 
 
         <Button
@@ -77,84 +71,62 @@
             android:background="@android:drawable/btn_plus"
             android:onClick="bPlusKlik"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/tv_lkl"
-            app:layout_constraintTop_toBottomOf="@id/tytul_lkl" />
+        />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/zobraz_area"
-        android:layout_width="367dp"
+    <LinearLayout
+        android:id="@+id/radio_groups_area"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/brzeg_margin"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/border_skib"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lkl_area">
+        android:layout_marginRight="20dp">
 
 
         <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-        <RadioButton
-            android:id="@+id/rb_cyfry"
+            android:id="@+id/rg_digits_circles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Cyfry"
-            android:textSize="30sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_weight="1"
+            android:padding="@dimen/rg_padding"
+            android:background="@drawable/border_skib_blue"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_cyfry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Cyfry  "
+                android:textSize="@dimen/rb_text_size"
+            />
 
             <RadioButton
                 android:id="@+id/rb_kolka"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Kółka"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rb_cyfry" />
-
+                android:text="Kółka  "
+                android:textSize="@dimen/rb_text_size"
+            />
         </RadioGroup>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 <!--        *********************************-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tryb_area"
-            android:layout_width="367dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/zobraz_area">
-
 
             <RadioGroup
                 android:id="@+id/rg_tryby"
-                android:background="@drawable/border_skib"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                android:layout_marginLeft="@dimen/brzeg_margin"
+                android:padding="@dimen/rg_padding"
+                android:layout_weight="1"
+                android:background="@drawable/border_skib_blue"
+                android:orientation="vertical">
 
                 <RadioButton
                     android:id="@+id/rb_nauka"
@@ -162,11 +134,8 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="Nauka"
-                    android:textSize="30sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    android:textSize="@dimen/rb_text_size"
+                />
 
                 <RadioButton
                     android:id="@+id/rb_trening"
@@ -174,25 +143,20 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="Trening"
-                    android:textSize="30sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rb_cyfry"
-                    />
+                    android:textSize="@dimen/rb_text_size"
+                />
             </RadioGroup>
 
-            <CheckBox
-                android:id="@+id/cb_zero"
-                android:checked="false"
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="z cyfrą Zero"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rg_tryby"/>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <CheckBox
+        android:id="@+id/cb_zero"
+        android:checked="false"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="z cyfrą Zero"
+        android:textSize="@dimen/rb_text_size"/>
 
     <Button
         android:id="@+id/bOK"
@@ -200,8 +164,7 @@
         android:layout_height="wrap_content"
         android:text="OK"
         android:textSize="60sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:onClick="bOkKlik"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

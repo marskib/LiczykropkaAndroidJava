@@ -16,8 +16,7 @@
         android:layout_weight="6"
         android:background="#C9D6DAC1"
         android:gravity="center"
-
-android:layout_marginBottom="0dp"
+        android:layout_marginBottom="0dp"
         android:orientation="vertical">
 
         <autyzmsoft.pl.liczykropka.MojTextView
@@ -31,6 +30,11 @@ android:layout_marginBottom="0dp"
             android:textStyle="bold" />
         />
 
+        <TextView
+            android:id="@+id/tv_rozdzielczosc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 
@@ -41,7 +45,7 @@ android:layout_marginBottom="0dp"
         android:layout_weight="26"
         android:orientation="vertical"
 
-        android:background="@drawable/border_skib"
+        android:background="@drawable/border_skib_red"
 
         android:layout_marginHorizontal="@dimen/brzeg_margin"
         android:layout_marginBottom="0dp">
@@ -61,7 +65,7 @@ android:layout_marginBottom="0dp"
         android:layout_weight="5"
         android:orientation="horizontal"
 
-        android:background="@drawable/border_skib"
+        android:background="@drawable/border_skib_red"
 
         android:visibility="invisible">
 

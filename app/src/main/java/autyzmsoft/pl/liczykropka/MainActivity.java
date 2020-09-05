@@ -3,15 +3,17 @@ package autyzmsoft.pl.liczykropka;
 import static autyzmsoft.pl.liczykropka.ZmienneGlobalne.MAX_LICZBA;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -204,6 +206,12 @@ public class MainActivity extends AppCompatActivity {
             width = dm.widthPixels;
             height = dm.heightPixels;
 
+
+            //sledzenie:
+            DajGestosc();
+
+
+
             if (mGlob.LBTNS <= 4) {
                 int lBtsRob = 2;
                 btH = height / (lBtsRob + 3); //button height; doswiadczalnie
@@ -225,6 +233,53 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } //koniec Metody()
+
+
+    public void DajGestosc() {
+
+        String sufiks;
+
+        int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        int density = getResources().getDisplayMetrics().densityDpi;
+        switch (density) {
+            case DisplayMetrics.DENSITY_LOW:
+                Toast.makeText(this, "LDPI", Toast.LENGTH_SHORT).show();
+                sufiks = "LDPI";
+                break;
+            case DisplayMetrics.DENSITY_MEDIUM:
+                Toast.makeText(this, "MDPI", Toast.LENGTH_SHORT).show();
+                sufiks = "MDPI";
+                break;
+            case DisplayMetrics.DENSITY_HIGH:
+                Toast.makeText(this, "HDPI", Toast.LENGTH_SHORT).show();
+                sufiks = "HDPI";
+                break;
+            case DisplayMetrics.DENSITY_XHIGH:
+                Toast.makeText(this, "XHDPI", Toast.LENGTH_SHORT).show();
+                sufiks = "XHDPI";
+                break;
+            case DisplayMetrics.DENSITY_XXHIGH:
+                Toast.makeText(this, "XXHDPI", Toast.LENGTH_SHORT).show();
+                sufiks = "XXHDPI";
+                break;
+            case DisplayMetrics.DENSITY_XXXHIGH:
+                Toast.makeText(this, "XXXHDPI", Toast.LENGTH_SHORT).show();
+                sufiks = "XXXDPI";
+                break;
+            case DisplayMetrics.DENSITY_560:
+                Toast.makeText(this, "560 ski ski", Toast.LENGTH_SHORT).show();
+                sufiks = "560 ski ski";
+                break;
+            default:
+                Toast.makeText(this, "nie znalazłem...", Toast.LENGTH_SHORT).show();
+                sufiks = "nie znalazlem gestosci...";
+        }
+
+        TextView tv_rozdz = (TextView) findViewById(R.id.tv_rozdzielczosc);
+        tv_rozdz.setText("  "+width+" x "+height+"   ... "+sufiks);
+
+    } //koniec Metody()
 
     private void calyEkran() {
         //* Aplikacja rozdmuchana na caly ekran */

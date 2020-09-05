@@ -181,5 +181,12 @@ public class MojInstrumentedTest {
         // do more
     }
 
+    @Test
+    public void Czy_ViewInteraction_Wystarczy() {
+        //to wystarczy, zeby test przeszedl.....
+        onView(withId(R.id.tvCyfra));
+    }
+
+
 
 } //koniec klasy
