@@ -1,5 +1,6 @@
 package autyzmsoft.pl.liczykropka;
 
+import static autyzmsoft.pl.liczykropka.ZmienneGlobalne.MAX_BTNS;
 import static autyzmsoft.pl.liczykropka.ZmienneGlobalne.MAX_LICZBA;
 
 import android.content.Intent;
@@ -182,9 +183,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     *  Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
+     * @param tButton
+     */
     private void ustawMarginesy(final MojButton tButton) {
-        //Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
+
         int dx = 10; //margin w pionie pomiedzy klawiszami (defaultowo)
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButton.getLayoutParams();// as LinearLayout.LayoutParams;
         if (mGlob.LBTNS < 4) dx = 20;
@@ -210,8 +214,13 @@ public class MainActivity extends AppCompatActivity {
             //sledzenie:
             DajGestosc();
 
+            int h = DajWysokoscButtonsArea();
+
+            btH = (int) (h/(mGlob.LBTNS + modyfikator(mGlob.LBTNS)));
+        txSize = (float) (btH / 3.5);
 
 
+/*
             if (mGlob.LBTNS <= 4) {
                 int lBtsRob = 2;
                 btH = height / (lBtsRob + 3); //button height; doswiadczalnie
@@ -232,7 +241,42 @@ public class MainActivity extends AppCompatActivity {
                 default: btH = (int) (btH / 1.20); break;
             }
 
+ */
+
         } //koniec Metody()
+
+    /***
+     * Do zwiekszenia dzielnika przy obliczaniu wysokosci buttona,
+     * w zaleznosci od wybranej w ustawieniach liczby buttonow.
+     * Chodzi o to, zeby "jakos" wygladalo ;) - im mniej klawiszy, tym szersze
+     */
+    private float modyfikator(final int ileBt) {
+        switch (ileBt) {
+            case MAX_BTNS : case MAX_BTNS-1 : return 0.8f;  //6,5 klawiszy
+            case MAX_BTNS-2 : return 1.8f;                  //4   klawisze
+            case MAX_BTNS-3 : return 2.1f;                  //3   klawisze
+            default: return 3;                              //2,1 klawisze
+        }
+    }
+
+
+    /***
+     * Znajduje wysokosc obszaru z klawiszami w px
+     * Zakladam, ze istnieja 3 linear layouty z nadanymi wagami (!)
+     */
+    private int DajWysokoscButtonsArea() {
+
+        final float waga1 = ((LinearLayout.LayoutParams) digit_area.getLayoutParams()).weight;
+        final float waga2 = ((LinearLayout.LayoutParams) buttons_area.getLayoutParams()).weight;
+        final float waga3 = ((LinearLayout.LayoutParams) nawigacja_area.getLayoutParams()).weight;
+
+        float czescSzukanaProcent =  (waga2 / (waga1+waga2+waga3));
+
+        int wysokoscPx = (int) (czescSzukanaProcent * height);
+
+        return wysokoscPx;
+
+    }
 
 
     public void DajGestosc() {

@@ -28,7 +28,6 @@
             android:textColor="#000"
             android:textSize="@dimen/cyfra_size"
             android:textStyle="bold" />
-        />
 
         <TextView
             android:id="@+id/tv_rozdzielczosc"
@@ -45,16 +44,17 @@
         android:layout_weight="26"
         android:orientation="vertical"
 
-        android:background="@drawable/border_skib_red"
+        android:background="@drawable/border_skib_blue"
 
         android:layout_marginHorizontal="@dimen/brzeg_margin"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="10dp">
 
         <!--  tutaj zostanie programowa wygenerowane do 6-ciu buttonow MojButtom
                 <Button
                     android:id="@+id/..."
                 </Button>
         -->
+
     </LinearLayout>
 
     <LinearLayout
@@ -65,7 +65,6 @@
         android:layout_weight="5"
         android:orientation="horizontal"
 
-        android:background="@drawable/border_skib_red"
 
         android:visibility="invisible">
 
