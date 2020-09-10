@@ -38,7 +38,8 @@
         android:background="@drawable/border_skib_red"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:padding="10dp">
+        android:paddingTop="@dimen/brzeg_margin"
+        android:paddingBottom="@dimen/brzeg_margin">
 
 
 
@@ -56,10 +57,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="5dp"
-            android:textSize="@dimen/rb_text_size"
+            android:layout_marginLeft="@dimen/lkl_margin"
+            android:layout_marginRight="@dimen/lkl_margin"
+            android:textSize="@dimen/lkl_size"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
         />
 

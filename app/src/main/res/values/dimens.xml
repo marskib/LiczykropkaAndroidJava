@@ -3,6 +3,8 @@
 <resources>
     <dimen name="brzeg_margin">30dp</dimen>
     <dimen name="cyfra_size">40sp</dimen>
+    <dimen name="lkl_size">60sp</dimen>
+    <dimen name="lkl_margin">30dp</dimen>
 
 
     <dimen name="tvInstrukcja_size">35sp</dimen>
