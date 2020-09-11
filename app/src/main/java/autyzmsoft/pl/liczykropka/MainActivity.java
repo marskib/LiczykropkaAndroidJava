@@ -250,12 +250,12 @@ public class MainActivity extends AppCompatActivity {
      * w zaleznosci od wybranej w ustawieniach liczby buttonow.
      * Chodzi o to, zeby "jakos" wygladalo ;) - im mniej klawiszy, tym szersze
      */
-    private float modyfikator(final int ileBt) {
-        switch (ileBt) {
-            case MAX_BTNS : case MAX_BTNS-1 : return 0.8f;  //6,5 klawiszy
-            case MAX_BTNS-2 : return 1.8f;                  //4   klawisze
-            case MAX_BTNS-3 : return 2.1f;                  //3   klawisze
-            default: return 3;                              //2,1 klawisze
+    private float modyfikator(final int ileBtns) {
+        switch (ileBtns) {
+            case MAX_BTNS : case MAX_BTNS-1 : return 0.8f; //6,5 klawiszy
+            case MAX_BTNS-2 : return 1.8f;                 //4   klawisze
+            case MAX_BTNS-3 : return 2.1f;                 //3   klawisze
+            default: return 3;                             //2,1 klawisze
         }
     }
 

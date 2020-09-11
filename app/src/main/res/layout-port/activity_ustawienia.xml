@@ -15,16 +15,19 @@
         android:id="@+id/tytul_ustawienia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/maly_odstep"
         android:text="USTAWIENIA"
         android:paddingBottom="10dp"
-        android:paddingTop="15dp"/>
+        android:paddingTop="5dp"/>
 
     <TextView
         android:id="@+id/tytul_lkl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
         android:text="Liczba Klawiszy (1-6)"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         android:textSize="20sp"
     />
@@ -96,12 +99,18 @@
             android:background="@drawable/border_skib_blue"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="na klawiszach"/>
+
             <RadioButton
                 android:id="@+id/rb_cyfry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Cyfry  "
+                android:text="Cyfry"
                 android:textSize="@dimen/rb_text_size"
             />
 
@@ -110,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Kółka  "
+                android:text="Kółka"
                 android:textSize="@dimen/rb_text_size"
             />
         </RadioGroup>
@@ -129,12 +138,18 @@
                 android:background="@drawable/border_skib_blue"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="tryb nauki"/>
+
                 <RadioButton
                     android:id="@+id/rb_nauka"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Nauka"
+                    android:text="Zadania"
                     android:textSize="@dimen/rb_text_size"
                 />
 
@@ -156,16 +171,29 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:text="z cyfrą Zero"
         android:textSize="@dimen/rb_text_size"/>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
 
     <Button
         android:id="@+id/bOK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/maly_odstep"
+        android:layout_marginRight="@dimen/maly_odstep"
         android:text="OK"
         android:textSize="60sp"
         android:onClick="bOkKlik"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>
