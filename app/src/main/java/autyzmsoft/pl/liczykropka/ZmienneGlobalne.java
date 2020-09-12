@@ -28,11 +28,14 @@ public class ZmienneGlobalne extends Application {
     public int LBTNS;                            //maksymalna dopuszczlna liczba klawiszy
     public boolean czyTrening;                   //czy jestesmy w trybie Treninu czy Nauki
     public boolean czyZero;                      //czy w cwiczeniach moze wystąpic liczba 0 Zero
+    public int density;                          //gestosc ekranu urzadzenia
 
     @Override
     public void onCreate() {
         super.onCreate();
         ustawParametryDefault();
+        density = getResources().getDisplayMetrics().densityDpi;
+
     }
 
     private void ustawParametryDefault() {

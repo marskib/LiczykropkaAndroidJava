@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     MojTextView tvCyfra;
 
+
     private float txSize = 0.0f;
     private int height   = 0;
     private int btH      = 0;
@@ -184,14 +185,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *  Ustawienie marginesow miedzy buttonami (musi byc poza konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala):
+     *  Ustawienie marginesow miedzy buttonami (musi byc poza
+     *  konstruktorem - klawisz musi fizyczne lezec na layoucie, inaczej nie dziala)
      * @param tButton
      */
     private void ustawMarginesy(final MojButton tButton) {
 
-        int dx = 10; //margin w pionie pomiedzy klawiszami (defaultowo)
+        int dx = 15; //margin w pionie pomiedzy klawiszami (defaultowo)
+        if (mGlob.density < DisplayMetrics.DENSITY_XHIGH) {
+            dx = 10;
+        }
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButton.getLayoutParams();// as LinearLayout.LayoutParams;
-        if (mGlob.LBTNS < 4) dx = 20;
+        if (mGlob.LBTNS < 4) dx = 30;
         params.setMargins(0, dx, 0, 0);
         tButton.setLayoutParams(params);
     }
@@ -210,38 +215,13 @@ public class MainActivity extends AppCompatActivity {
             width = dm.widthPixels;
             height = dm.heightPixels;
 
-
             //sledzenie:
             DajGestosc();
 
             int h = DajWysokoscButtonsArea();
 
             btH = (int) (h/(mGlob.LBTNS + modyfikator(mGlob.LBTNS)));
-        txSize = (float) (btH / 3.5);
-
-
-/*
-            if (mGlob.LBTNS <= 4) {
-                int lBtsRob = 2;
-                btH = height / (lBtsRob + 3); //button height; doswiadczalnie
-            }
-            if (mGlob.LBTNS == 5) {   // bo dobrze wyglada przy 5-ciu klawiszach:
-                int lBtsRob = 4;
-                btH = height / (lBtsRob + 2); //button height; doswiadczalnie
-            }
-            if (mGlob.LBTNS == 6) {
-                btH = height / (mGlob.LBTNS + 1);  //button height; doswiadczalnie
-            }
             txSize = (float) (btH / 3.5);
-
-            //podrasowanie  - 2020.07.16:
-            switch(mGlob.LBTNS) {
-                case 6: btH = (int) (btH / 1.30); break;
-                case 5: btH = (int) (btH / 1.25); break;
-                default: btH = (int) (btH / 1.20); break;
-            }
-
- */
 
         } //koniec Metody()
 
@@ -285,8 +265,7 @@ public class MainActivity extends AppCompatActivity {
 
         int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
 
-        int density = getResources().getDisplayMetrics().densityDpi;
-        switch (density) {
+        switch (mGlob.density) {
             case DisplayMetrics.DENSITY_LOW:
                 Toast.makeText(this, "LDPI", Toast.LENGTH_SHORT).show();
                 sufiks = "LDPI";

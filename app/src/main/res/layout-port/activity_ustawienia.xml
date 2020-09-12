@@ -9,8 +9,6 @@
     android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
 
-<!--    android:background="@color/colorAccent"-->
-
     <TextView
         android:id="@+id/tytul_ustawienia"
         android:layout_width="wrap_content"
@@ -103,7 +101,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="na klawiszach"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/rg_tv_size"
+                android:text="co na klawiszach"/>
 
             <RadioButton
                 android:id="@+id/rb_cyfry"
@@ -122,46 +122,47 @@
                 android:text="Kółka"
                 android:textSize="@dimen/rb_text_size"
             />
+
         </RadioGroup>
 
 
-<!--        *********************************-->
+        <RadioGroup
+            android:id="@+id/rg_tryby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/brzeg_margin"
+            android:padding="@dimen/rg_padding"
+            android:layout_weight="1"
+            android:background="@drawable/border_skib_blue"
+            android:orientation="vertical">
 
-
-            <RadioGroup
-                android:id="@+id/rg_tryby"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/brzeg_margin"
-                android:padding="@dimen/rg_padding"
-                android:layout_weight="1"
-                android:background="@drawable/border_skib_blue"
-                android:orientation="vertical">
+                android:layout_marginStart="2dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/rg_tv_size"
+                android:text="tryb nauki"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:text="tryb nauki"/>
+            <RadioButton
+                android:id="@+id/rb_nauka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Zadania"
+                android:textSize="@dimen/rb_text_size"
+            />
 
-                <RadioButton
-                    android:id="@+id/rb_nauka"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="Zadania"
-                    android:textSize="@dimen/rb_text_size"
-                />
+            <RadioButton
+                android:id="@+id/rb_trening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Trening"
+                android:textSize="@dimen/rb_text_size"
+            />
 
-                <RadioButton
-                    android:id="@+id/rb_trening"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Trening"
-                    android:textSize="@dimen/rb_text_size"
-                />
-            </RadioGroup>
+        </RadioGroup>
 
     </LinearLayout>
 

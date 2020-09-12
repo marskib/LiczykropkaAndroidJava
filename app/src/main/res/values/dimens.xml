@@ -25,5 +25,6 @@
     <dimen name="rb_text_size">15sp</dimen>
 
     <dimen name="rg_padding">5dp</dimen>
+    <dimen name="rg_tv_size">20sp</dimen>
 
 </resources>
