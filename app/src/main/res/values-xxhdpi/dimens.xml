@@ -3,5 +3,6 @@
 <resources>
     <dimen name="cyfra_size">30sp</dimen>
     <dimen name="rg_tv_size">16sp</dimen>
+    <dimen name="lkl_area_padding_top_bottom">20dp</dimen>
 
 </resources>

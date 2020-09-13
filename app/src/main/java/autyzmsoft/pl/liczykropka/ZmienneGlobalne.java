@@ -29,6 +29,7 @@ public class ZmienneGlobalne extends Application {
     public boolean czyTrening;                   //czy jestesmy w trybie Treninu czy Nauki
     public boolean czyZero;                      //czy w cwiczeniach moze wystąpic liczba 0 Zero
     public int density;                          //gestosc ekranu urzadzenia
+    public boolean czyUnikalne;                  //czy wartosci na klawiszach maja byc unikalne
 
     @Override
     public void onCreate() {
@@ -43,5 +44,6 @@ public class ZmienneGlobalne extends Application {
         czyJakLiczba = false;
         czyTrening = true;
         czyZero = false;
+        czyUnikalne = false;
     }
 }

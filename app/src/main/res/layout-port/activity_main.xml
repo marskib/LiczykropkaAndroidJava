@@ -42,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="26"
+        android:background="@drawable/border_skib_red"
         android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/brzeg_margin"
         android:layout_marginBottom="10dp">

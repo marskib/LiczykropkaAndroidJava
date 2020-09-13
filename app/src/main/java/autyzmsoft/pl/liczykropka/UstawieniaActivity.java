@@ -21,6 +21,7 @@ public class UstawieniaActivity extends AppCompatActivity {
     RadioButton rb_trening;
     RadioButton rb_nauka;
     CheckBox    cb_zero;
+    CheckBox    cb_unique;
 
 
     @Override
@@ -52,6 +53,7 @@ public class UstawieniaActivity extends AppCompatActivity {
         rb_trening = (RadioButton) findViewById(R.id.rb_trening);
         rb_nauka   = (RadioButton) findViewById(R.id.rb_nauka);
         cb_zero    = (CheckBox)    findViewById(R.id.cb_zero);
+        cb_unique  = (CheckBox)    findViewById(R.id.cb_unikalne);
     }
 
 
@@ -86,6 +88,7 @@ public class UstawieniaActivity extends AppCompatActivity {
         rb_nauka.setChecked(!mGlob.czyTrening);
 
         cb_zero.setChecked(mGlob.czyZero);
+        cb_unique.setChecked(mGlob.czyUnikalne);
     }
 
 
@@ -121,6 +124,7 @@ public class UstawieniaActivity extends AppCompatActivity {
         mGlob.czyTrening = rb_trening.isChecked();
 
         mGlob.czyZero = cb_zero.isChecked();
+        mGlob.czyUnikalne = cb_unique.isChecked();
 
 //        Toast.makeText(this, "onPause w UstawieniaActivity", Toast.LENGTH_SHORT).show();
     }

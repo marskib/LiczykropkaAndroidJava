@@ -4,10 +4,11 @@
     <dimen name="cyfra_size">22sp</dimen>
     <dimen name="arrow_padding_left">100dp</dimen>
 
-    <dimen name="rb_text_size">23sp</dimen>
+    <dimen name="rb_text_size">20sp</dimen>
 
     <dimen name="rg_padding">5dp</dimen>
-    <dimen name="rg_tv_size">20sp</dimen>
+    <dimen name="rg_tv_size">15sp</dimen>
+    <dimen name="lkl_area_padding_top_bottom">10dp</dimen>
 
 
 </resources>

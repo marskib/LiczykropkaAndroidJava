@@ -116,9 +116,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /***
+     * Blokuje wzystkie klawisze, oprocz tych, ktore maja wartosc taka,
+     * jak klawisz klikniety. Dzieki temu warunowi dziala dobrze w 2ch trybch nuki.
+     * @param bExcept
+     */
     private void blokujListeneryOprocz(final MojButton bExcept) {
+        int cyfraExcept = bExcept.getValue();
         for (final MojButton mb : tButtons) {
-            if (mb != bExcept) {
+            if (mb.getValue() != cyfraExcept) {
                 mb.setClickable(false);
             }
         }
@@ -149,11 +155,14 @@ public class MainActivity extends AppCompatActivity {
         //
         int min = (mGlob.czyZero) ? 0 : 1;
         MojGenerator mGen = new MojGenerator(min, MAX_LICZBA);
+        int wart;
+
 
         for (int i=0; i< mGlob.LBTNS; i++) {
 
             try {
-                mb = new MojButton(this, mGen.dajWartUnikalna(), mGlob.czyJakLiczba, txSize, btH);
+                wart = (mGlob.czyUnikalne) ? mGen.dajWartUnikalna() : mGen.dajWartDowolna();
+                mb = new MojButton(this, wart, mGlob.czyJakLiczba, txSize, btH);
                 mb.setOnClickListener(coNaKlikNaBtn);
                 tButtons[i] = mb;
                 buttons_area.addView(tButtons[i]);
@@ -192,11 +201,16 @@ public class MainActivity extends AppCompatActivity {
     private void ustawMarginesy(final MojButton tButton) {
 
         int dx = 15; //margin w pionie pomiedzy klawiszami (defaultowo)
-        if (mGlob.density < DisplayMetrics.DENSITY_XHIGH) {
+        if (mGlob.density <= DisplayMetrics.DENSITY_XHIGH) {
             dx = 10;
         }
+        switch (mGlob.LBTNS) { //jesli lawiszy mniej, to mozna sobie poswolic na wieksze marginesy
+            case 6: break;
+            case 5: dx += 2; break;
+            case 4: dx += 4; break;
+            default: dx = 30;//3,2,1
+        }
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tButton.getLayoutParams();// as LinearLayout.LayoutParams;
-        if (mGlob.LBTNS < 4) dx = 30;
         params.setMargins(0, dx, 0, 0);
         tButton.setLayoutParams(params);
     }
@@ -299,6 +313,7 @@ public class MainActivity extends AppCompatActivity {
                 sufiks = "nie znalazlem gestosci...";
         }
 
+        //sledzenie:
         TextView tv_rozdz = (TextView) findViewById(R.id.tv_rozdzielczosc);
         tv_rozdz.setText("  "+width+" x "+height+"   ... "+sufiks);
 

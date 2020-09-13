@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <dimen name="cyfra_size">22sp</dimen>
+    <dimen name="cyfra_size">40sp</dimen>
 
     <dimen name="arrow_padding_left">120dp</dimen>
 
@@ -9,6 +9,7 @@
 
     <dimen name="rg_padding">10dp</dimen>
     <dimen name="rg_tv_size">15sp</dimen>
+    <dimen name="lkl_area_padding_top_bottom">20dp</dimen>
 
 
 </resources>

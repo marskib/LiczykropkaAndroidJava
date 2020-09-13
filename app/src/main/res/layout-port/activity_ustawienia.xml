@@ -39,8 +39,8 @@
         android:background="@drawable/border_skib_red"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:paddingTop="@dimen/brzeg_margin"
-        android:paddingBottom="@dimen/brzeg_margin">
+        android:paddingTop="@dimen/lkl_area_padding_top_bottom"
+        android:paddingBottom="@dimen/lkl_area_padding_top_bottom">
 
 
 
@@ -103,7 +103,7 @@
                 android:layout_marginStart="2dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/rg_tv_size"
-                android:text="co na klawiszach"/>
+                android:text="co na klawiszu"/>
 
             <RadioButton
                 android:id="@+id/rb_cyfry"
@@ -165,6 +165,16 @@
         </RadioGroup>
 
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cb_unikalne"
+        android:checked="false"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="wszystkie klawisze różne"
+        android:textSize="@dimen/rb_text_size"/>
 
     <CheckBox
         android:id="@+id/cb_zero"
